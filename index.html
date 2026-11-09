@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>51爆料每日大赛大乱斗 - 赛事动态与深度解析</title>
+  <meta name="description" content="51爆料每日大赛大乱斗汇聚每日赛事动态、选手表现、版本趋势与玩家评论。提供具体比赛条目、深度规则解析、观赛指南和社区讨论，适合赛事爱好者与参赛玩家查阅。">
+  <meta name="keywords" content="每日大乱斗, 赛事爆料, 选手对局, 版本更新, 观赛指南">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1e2b'/%3E%3Ccircle cx='16' cy='12' r='5' fill='%23f04e5e'/%3E%3Cpath d='M8 24 L16 16 L24 24' stroke='%23f5c84b' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    /* ---------- 全局变量与重置 ---------- */
+    :root {
+      --bg: #f7f8fc;
+      --panel: #ffffff;
+      --ink: #1b1f2b;
+      --ink-secondary: #4a4f5e;
+      --muted: #7c8297;
+      --border: #e3e6ed;
+      --primary: #d23f4b;
+      --primary-soft: #fceef0;
+      --accent: #f5b342;
+      --accent-soft: #fef7e9;
+      --blue: #3d6bdb;
+      --blue-soft: #eef2fc;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
+      --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --header-height: 56px;
+      --announce-height: 36px;
+      --anchor-offset: calc(var(--header-height) + var(--announce-height) + 12px);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--anchor-offset);
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    /* ---------- 吸顶公告条 ---------- */
+    .announcement-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--announce-height);
+      background: linear-gradient(90deg, #1a1e2b 0%, #2a2f40 100%);
+      color: #f0f2f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+
+    .announcement-bar span {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .announcement-bar .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 8px;
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ---------- 吸顶页头 ---------- */
+    .site-header {
+      position: sticky;
+      top: var(--announce-height);
+      z-index: 99;
+      height: var(--header-height);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: 1380px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .main-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .main-nav a {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      background: var(--primary-soft);
+      color: var(--primary);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .search-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-toggle:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .search-toggle:hover {
+      border-color: var(--primary);
+    }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 40px 24px 32px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--ink-secondary);
+      margin-bottom: 24px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 10px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-primary:hover {
+      background: #b8333e;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      padding: 9px 22px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .btn-outline:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+    }
+
+    /* ---------- 三栏布局 ---------- */
+    .container {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ---------- 左频道栏 ---------- */
+    .channel-sidebar {
+      position: sticky;
+      top: calc(var(--announce-height) + var(--header-height) + 16px);
+      align-self: start;
+    }
+
+    .channel-sidebar h2 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .channel-list a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--ink-secondary);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .channel-list a:hover,
+    .channel-list a:focus-visible {
+      background: var(--primary-soft);
+      color: var(--primary);
+      outline: none;
+    }
+
+    .channel-list a .ch-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    /* ---------- 主内容区 ---------- */
+    .main-content {
+      min-width: 0;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+
+    .section-header .more-link {
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .section-header .more-link:hover {
+      color: var(--primary);
+    }
+
+    .section-intro {
+      font-size: 15px;
+      color: var(--ink-secondary);
+      margin-bottom: 20px;
+      line-height: 1.75;
+    }
+
+    /* ---------- 概览段落 ---------- */
+    .overview-text {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--ink-secondary);
+    }
+
+    .overview-text p + p {
+      margin-top: 12px;
+    }
+
+    /* ---------- 精选卡片网格 ---------- */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--border);
+    }
+
+    .card-body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.2px;
+    }
+
+    .tag-red {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .tag-gold {
+      background: var(--accent-soft);
+      color: #b57d1a;
+    }
+
+    .tag-blue {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag-gray {
+      background: #eef0f4;
+      color: var(--ink-secondary);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+
+    .card-meta .hot {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ---------- 紧凑列表 ---------- */
+    .compact-list {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .compact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .compact-item:last-child {
+      border-bottom: none;
+    }
+
+    .compact-item:hover {
+      background: #fafbfd;
+    }
+
+    .compact-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      min-width: 22px;
+      padding-top: 2px;
+    }
+
+    .compact-item:nth-child(-n+3) .compact-num {
+      color: var(--primary);
+    }
+
+    .compact-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .compact-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .compact-summary {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .compact-time {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    /* ---------- 分类入口网格 ---------- */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .category-item {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .category-item:hover,
+    .category-item:focus-visible {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-soft);
+      outline: none;
+    }
+
+    /* ---------- 深度解析 ---------- */
+    .deep-dive {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 32px;
+    }
+
+    .deep-dive h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 24px 0 10px;
+      line-height: 1.4;
+    }
+
+    .deep-dive h3:first-child {
+      margin-top: 0;
+    }
+
+    .deep-dive p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-secondary);
+      margin-bottom: 10px;
+    }
+
+    .deep-dive ul {
+      padding-left: 20px;
+      margin: 8px 0 14px;
+      color: var(--ink-secondary);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .deep-dive ul li {
+      list-style: disc;
+      margin-bottom: 4px;
+    }
+
+    .deep-dive .highlight-box {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #7a5c1a;
+    }
+
+    /* ---------- 体验指南（步骤） ---------- */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .step-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-body h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.65;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq-item {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      list-style: none;
+      transition: background 0.15s;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .faq-item[open] summary::after {
+      content: '−';
+      transform: rotate(0deg);
+    }
+
+    .faq-item summary:hover {
+      background: #fafbfd;
+    }
+
+    .faq-body {
+      padding: 0 20px 18px;
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.75;
+    }
+
+    /* ---------- 评论 ---------- */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .comment-item {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+    }
+
+    .comment-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .comment-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .comment-nick {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .comment-date {
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    .comment-text {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.7;
+    }
+
+    /* ---------- 资讯列表 ---------- */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .news-item {
+      display: flex;
+      gap: 16px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      transition: box-shadow 0.2s;
+    }
+
+    .news-item:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .news-thumb {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+      background: var(--border);
+    }
+
+    .news-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .news-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .news-summary {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 6px;
+    }
+
+    .news-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ---------- 相关推荐标签 ---------- */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag-cloud a {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--ink-secondary);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .tag-cloud a:hover,
+    .tag-cloud a:focus-visible {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-soft);
+      outline: none;
+    }
+
+    /* ---------- 右辅助栏 ---------- */
+    .right-sidebar {
+      position: sticky;
+      top: calc(var(--announce-height) + var(--header-height) + 16px);
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+    }
+
+    .sidebar-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .hot-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hot-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .hot-list-item .rank {
+      font-weight: 700;
+      color: var(--muted);
+      min-width: 18px;
+    }
+
+    .hot-list-item:nth-child(1) .rank,
+    .hot-list-item:nth-child(2) .rank,
+    .hot-list-item:nth-child(3) .rank {
+      color: var(--primary);
+    }
+
+    .hot-list-item a {
+      color: var(--ink-secondary);
+      transition: color 0.15s;
+    }
+
+    .hot-list-item a:hover {
+      color: var(--primary);
+    }
+
+    .update-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .update-item {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .update-item .u-title {
+      font-weight: 600;
+      color: var(--ink-secondary);
+    }
+
+    .update-item .u-time {
+      font-size: 12px;
+      color: var(--muted);
+      display: block;
+      margin-top: 1px;
+    }
+
+    /* ---------- 页尾 ---------- */
+    .site-footer {
+      background: #1a1e2b;
+      color: #c4c9d6;
+      padding: 48px 24px 32px;
+      margin-top: 20px;
+    }
+
+    .footer-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand .brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #8b91a2;
+      max-width: 320px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col a {
+      font-size: 13px;
+      color: #8b91a2;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      max-width: 1380px;
+      margin: 40px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #2f3446;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #6b7183;
+    }
+
+    /* ---------- 搜索面板 ---------- */
+    .search-panel {
+      display: none;
+      position: fixed;
+      top: calc(var(--announce-height) + var(--header-height));
+      left: 0;
+      right: 0;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      padding: 16px 24px;
+      z-index: 98;
+    }
+
+    .search-panel.open {
+      display: block;
+    }
+
+    .search-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .search-close {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .search-close:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .search-results {
+      max-width: 600px;
+      margin: 12px auto 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 1200px) {
+      .container {
+        grid-template-columns: 160px 1fr 240px;
+        gap: 24px;
+      }
+      .hero {
+        grid-template-columns: 1fr 320px;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr 260px;
+      }
+      .channel-sidebar {
+        display: none;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-content {
+        max-width: 100%;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-visual {
+        display: none;
+      }
+      .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 0 16px 40px;
+      }
+      .right-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .hero {
+        padding: 28px 16px 20px;
+      }
+      .hero h1 {
+        font-size: 26px;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .news-item {
+        flex-direction: column;
+      }
+      .news-thumb {
+        width: 100%;
+        height: 140px;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+      .main-nav {
+        display: none;
+      }
+      .header-inner {
+        gap: 12px;
+      }
+      .site-header {
+        padding: 0 16px;
+      }
+      .deep-dive {
+        padding: 20px 18px;
+      }
+      .overview-text {
+        padding: 18px 20px;
+      }
+      .right-sidebar {
+        grid-template-columns: 1fr;
+      }
+      .announcement-bar {
+        font-size: 12px;
+        padding: 0 12px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .category-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .compact-item {
+        padding: 12px 14px;
+      }
+    }
+
+    /* 键盘焦点可见 */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="announcement-bar" role="status">
+    <span><span class="dot"></span>11 月 8 日新增 12 场对决回放 · 本周大乱斗积分榜更新 · 新英雄「霜语者」加入轮换池</span>
+  </div>
+
+  <!-- 吸顶页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#1a1e2b"/>
+          <circle cx="16" cy="12" r="5" fill="#f04e5e"/>
+          <path d="M8 24 L16 16 L24 24" stroke="#f5c84b" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">51爆料每日大赛大乱斗</span>
+      </div>
+      <nav class="main-nav" aria-label="主题导航">
+        <a href="/#overview">赛事概览</a>
+        <a href="/#featured">精选对决</a>
+        <a href="/#latest">最新动态</a>
+        <a href="/#categories">分类入口</a>
+        <a href="/#deep-dive">深度解析</a>
+        <a href="/#guide">观赛指南</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/#comments">玩家评论</a>
+        <a href="/#news">相关资讯</a>
+      </nav>
+      <div class="header-actions">
+        <button class="search-toggle" id="searchToggle" aria-label="打开搜索">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          搜索
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 搜索面板 -->
+  <div class="search-panel" id="searchPanel">
+    <div class="search-inner">
+      <input type="text" class="search-input" id="searchInput" placeholder="搜索选手、英雄、赛事术语…" aria-label="搜索页面内容">
+      <button class="search-close" id="searchClose">关闭</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>51爆料每日大赛大乱斗</h1>
+      <p class="hero-desc">这里汇聚每日大乱斗赛事的完整对阵记录、选手操作集锦、版本英雄梯度与社区热议话题。从青铜组到王者组，从常规轮换到特殊规则赛，你可以找到具体场次的数据复盘、选手表现评分以及赛事规则详解。</p>
+      <div class="hero-actions">
+        <a href="/#featured" class="btn-primary">查看今日精选对决</a>
+        <a href="/#latest" class="btn-outline">最新赛果速览</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 380 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="40" width="340" height="220" rx="20" fill="#1a1e2b"/>
+        <rect x="40" y="60" width="140" height="80" rx="10" fill="#2a2f40"/>
+        <rect x="40" y="60" width="140" height="80" rx="10" stroke="#f04e5e" stroke-width="2"/>
+        <circle cx="80" cy="90" r="16" fill="#f04e5e" opacity="0.3"/>
+        <circle cx="80" cy="90" r="10" fill="#f04e5e"/>
+        <text x="100" y="95" fill="#e3e6ed" font-size="12" font-family="system-ui">选手A</text>
+        <rect x="200" y="60" width="140" height="80" rx="10" fill="#2a2f40"/>
+        <circle cx="240" cy="90" r="16" fill="#f5c84b" opacity="0.3"/>
+        <circle cx="240" cy="90" r="10" fill="#f5c84b"/>
+        <text x="260" y="95" fill="#e3e6ed" font-size="12" font-family="system-ui">选手B</text>
+        <rect x="40" y="160" width="300" height="80" rx="10" fill="#222738"/>
+        <rect x="60" y="180" width="80" height="40" rx="6" fill="#3d6bdb" opacity="0.5"/>
+        <rect x="160" y="180" width="80" height="40" rx="6" fill="#d23f4b" opacity="0.5"/>
+        <rect x="260" y="180" width="60" height="40" rx="6" fill="#f5b342" opacity="0.5"/>
+        <text x="70" y="205" fill="#e3e6ed" font-size="10" font-family="system-ui">击杀</text>
+        <text x="170" y="205" fill="#e3e6ed" font-size="10" font-family="system-ui">助攻</text>
+        <text x="270" y="205" fill="#e3e6ed" font-size="10" font-family="system-ui">伤害</text>
+        <path d="M310 30 L330 50 L310 70" stroke="#f5c84b" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M50 30 L30 50 L50 70" stroke="#f04e5e" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 三栏布局容器 -->
+  <div class="container">
+
+    <!-- 左频道侧栏 -->
+    <aside class="channel-sidebar" aria-label="频道索引">
+      <h2>频道索引</h2>
+      <nav class="channel-list">
+        <a href="/#overview"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>赛事概览</a>
+        <a href="/#featured"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>精选对决</a>
+        <a href="/#latest"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>最新动态</a>
+        <a href="/#categories"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>分类入口</a>
+        <a href="/#deep-dive"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>深度解析</a>
+        <a href="/#guide"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>观赛指南</a>
+        <a href="/#faq"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>常见问题</a>
+        <a href="/#comments"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>玩家评论</a>
+        <a href="/#news"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>相关资讯</a>
+        <a href="/#recommend"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>相关推荐</a>
+        <a href="/#ranking"><svg class="ch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>热门榜单</a>
+      </nav>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+
+      <!-- 1. 主题领域概览 -->
+      <section class="section" id="overview">
+        <div class="section-header">
+          <h2>每日大乱斗赛事全景</h2>
+        </div>
+        <div class="overview-text">
+          <p>每日大赛大乱斗是一项以随机英雄轮换、多轮淘汰制为核心的竞技赛事形式。每个比赛日通常包含 6 至 8 轮对决，参赛选手从统一英雄池中随机抽取角色，在限定地图「裂谷竞技场」中进行 3v3 对抗。赛事按积分排名，单日总积分最高者获得当日冠军。当前赛季已进行至第 14 周，累计参赛选手超过 2400 人次。</p>
+          <p>赛事内容主要围绕三条线索展开：选手操作与战术选择、英雄梯度与版本适配、以及积分规则与晋级机制。近期版本中，「霜语者」凭借范围控制能力成为热门首选，搭配「岩盾守卫」的防守反击体系胜率稳定在 54% 以上。与此同时，部分选手开始尝试双刺客速攻流，在特定地图中取得突破。每日赛事结束后，社区会整理关键对局回放、选手数据面板和英雄胜率变化，供后续参赛者参考。</p>
+        </div>
+      </section>
+
+      <!-- 2. 精选内容推荐 -->
+      <section class="section" id="featured">
+        <div class="section-header">
+          <h2>今日精选对决与选手表现</h2>
+          <a href="/#latest" class="more-link">查看全部 →</a>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/daluandou-match01/400/300" alt="霜语者与岩盾守卫组合对局截图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-red">今日焦点</span><span class="tag tag-gold">控制流</span><span class="tag tag-blue">王者组</span></div>
+              <h3 class="card-title">霜语者+岩盾守卫体系 7 连胜</h3>
+              <p class="card-desc">选手「夜风」使用霜语者先手开团，配合岩盾守卫反打，在裂谷竞技场连续拿下 7 场胜利。关键第三轮中，霜语者在残血状态下释放冰环控住三人，完成翻盘。</p>
+              <div class="card-meta"><span class="hot">🔥 热度 9.8</span><span>胜率 71%</span><span>今天 14:20</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/daluandou-match02/400/300" alt="双刺客速攻流对局回放封面" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-red">战术创新</span><span class="tag tag-gold">速攻</span><span class="tag tag-blue">钻石组</span></div>
+              <h3 class="card-title">双刺客 90 秒速推战术</h3>
+              <p class="card-desc">选手「影刃」与「疾风」组成双刺客组合，利用高机动性在开局 90 秒内连续击杀对方后排，创下本赛季最快单局纪录。该战术对地图视野控制要求极高。</p>
+              <div class="card-meta"><span class="hot">🔥 热度 9.5</span><span>胜率 62%</span><span>今天 12:05</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/daluandou-match03/400/300" alt="新手组逆袭对局截图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-red">逆袭</span><span class="tag tag-gold">新手组</span><span class="tag tag-blue">防守</span></div>
+              <h3 class="card-title">新手组「铁壁」残局 1v3 翻盘</h3>
+              <p class="card-desc">在队友全部阵亡的情况下，选手「铁壁」使用重装英雄「熔岩巨人」利用地形卡位，连续躲避三波集火，最终拖到加时赛并完成反杀，成为今日社区讨论焦点。</p>
+              <div class="card-meta"><span class="hot">🔥 热度 9.2</span><span>评分 9.4</span><span>今天 10:45</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/daluandou-match04/400/300" alt="版本英雄梯度分析封面" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-red">版本分析</span><span class="tag tag-gold">英雄梯度</span><span class="tag tag-blue">数据</span></div>
+              <h3 class="card-title">11 月首周英雄胜率榜：霜语者登顶</h3>
+              <p class="card-desc">基于 11 月 1 日至 7 日共 186 场对局数据，霜语者以 56.2% 胜率位列第一，岩盾守卫（54.8%）与影刃（53.1%）紧随其后。新英雄「虚空行者」首周胜率仅 47.3%，表现低于预期。</p>
+              <div class="card-meta"><span class="hot">🔥 热度 8.9</span><span>样本 186 场</span><span>11 月 7 日</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/daluandou-match05/400/300" alt="周末特殊规则赛预告图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-red">赛事预告</span><span class="tag tag-gold">特殊规则</span><span class="tag tag-blue">周末</span></div>
+              <h3 class="card-title">周末「双倍积分·无禁用」规则赛</h3>
+              <p class="card-desc">11 月 9 日至 10 日将开启特殊规则赛：取消英雄禁用环节，所有英雄均可选用，同时单场积分翻倍。该规则下预计速攻流与召唤流使用率会显著上升。</p>
+              <div class="card-meta"><span class="hot">🔥 热度 8.7</span><span>倒计时 1 天</span><span>11 月 8 日</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/daluandou-match06/400/300" alt="选手夜风赛季数据面板" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-red">选手档案</span><span class="tag tag-gold">赛季数据</span><span class="tag tag-blue">王者组</span></div>
+              <h3 class="card-title">「夜风」赛季数据：参团率 78.4%</h3>
+              <p class="card-desc">王者组选手「夜风」本赛季共参与 142 场对决，场均击杀 4.2、助攻 7.8，参团率高达 78.4%。其最擅长的英雄是霜语者与岩盾守卫，两者合计出场 89 次。</p>
+              <div class="card-meta"><span class="hot">🔥 热度 8.5</span><span>评分 9.1</span><span>11 月 7 日</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. 最新更新 / 动态 -->
+      <section class="section" id="latest">
+        <div class="section-header">
+          <h2>最新赛果与动态更新</h2>
+          <a href="/#news" class="more-link">更多资讯 →</a>
+        </div>
+        <div class="compact-list">
+          <div class="compact-item">
+            <span class="compact-num">01</span>
+            <div class="compact-body">
+              <div class="compact-title">第 14 周周三积分赛结束，「夜风」以 312 分暂列榜首</div>
+              <div class="compact-summary">今日共进行 8 轮对决，夜风拿下 5 场第一，总积分领先第二名「铁壁」27 分。明日将进行本周最终轮。</div>
+            </div>
+            <span class="compact-time">今天 21:30</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-num">02</span>
+            <div class="compact-body">
+              <div class="compact-title">新英雄「霜语者」首周禁用率达到 43%</div>
+              <div class="compact-summary">根据 186 场对局统计，霜语者在高分段禁用率高达 43%，成为版本最受针对的英雄。其冰环控制时长可能在下个补丁中调整。</div>
+            </div>
+            <span class="compact-time">今天 18:15</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-num">03</span>
+            <div class="compact-body">
+              <div class="compact-title">周末特殊规则赛对阵表公布</div>
+              <div class="compact-summary">11 月 9 日至 10 日「双倍积分·无禁用」规则赛完整对阵已发布，共 64 名选手参赛，首轮对阵包括夜风 vs 影刃、铁壁 vs 疾风。</div>
+            </div>
+            <span class="compact-time">今天 16:00</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-num">04</span>
+            <div class="compact-body">
+              <div class="compact-title">「裂谷竞技场」地图视野机制调整说明</div>
+              <div class="compact-summary">官方于今日凌晨发布热更新，调整了草丛视野范围与扫描冷却时间。速攻流战术的视野优势被小幅削弱。</div>
+            </div>
+            <span class="compact-time">今天 09:20</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-num">05</span>
+            <div class="compact-body">
+              <div class="compact-title">「铁壁」1v3 翻盘片段社区播放量突破 12 万</div>
+              <div class="compact-summary">该片段在社区内引发广泛讨论，许多玩家开始研究熔岩巨人的地形卡位技巧。相关教学帖今日新增 30 余篇。</div>
+            </div>
+            <span class="compact-time">昨天 22:10</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-num">06</span>
+            <div class="compact-body">
+              <div class="compact-title">11 月 7 日英雄胜率榜单更新：虚空行者跌至 47.3%</div>
+              <div class="compact-summary">新英雄虚空行者在首周表现不佳，胜率仅 47.3%。主要问题在于技能前摇较长，容易被控制链打断。</div>
+            </div>
+            <span class="compact-time">11 月 7 日</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-num">07</span>
+            <div class="compact-body">
+              <div class="compact-title">第 13 周冠军「夜风」获赠限定头像框</div>
+              <div class="compact-summary">第 13 周总积分冠军奖励已发放，夜风获得专属头像框与英雄皮肤自选箱。本周冠军争夺仍在继续。</div>
+            </div>
+            <span class="compact-time">11 月 6 日</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-num">08</span>
+            <div class="compact-body">
+              <div class="compact-title">「双刺客速攻流」教学视频在社区热传</div>
+              <div class="compact-summary">由选手「影刃」录制的双刺客战术解说视频，详细拆解了开局 90 秒的路线规划与集火时机，适合钻石及以上分段参考。</div>
+            </div>
+            <span class="compact-time">11 月 5 日</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section class="section" id="categories">
+        <div class="section-header">
+          <h2>按类型浏览赛事内容</h2>
+        </div>
+        <div class="category-grid">
+          <div class="category-item">英雄梯度</div>
+          <div class="category-item">选手数据</div>
+          <div class="category-item">战术复盘</div>
+          <div class="category-item">规则详解</div>
+          <div class="category-item">地图机制</div>
+          <div class="category-item">新手入门</div>
+          <div class="category-item">版本更新</div>
+          <div class="category-item">赛事预告</div>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析正文 -->
+      <section class="section" id="deep-dive">
+        <div class="section-header">
+          <h2>深度解析：大乱斗的胜负手与版本逻辑</h2>
+        </div>
+        <div class="deep-dive">
+          <h3>英雄梯度与阵容搭配的底层逻辑</h3>
+          <p>每日大赛大乱斗的英雄池每周轮换，但梯度分化始终存在。以 11 月首周数据为例，霜语者、岩盾守卫、影刃稳居 T1 梯队，其共同特点是具备「先手控制 + 反打容错」双重能力。霜语者的冰环拥有 1.8 秒群体眩晕，岩盾守卫的护盾反击可吸收 2200 点伤害，影刃则依靠三段位移在残局中收割。这三者组合时，控制链覆盖率可达 4.2 秒，足以在团战中打出两轮完整输出。</p>
+          <p>相比之下，虚空行者的技能前摇长达 0.6 秒，在高端局中极易被预判打断。其胜率仅 47.3% 并非数值不足，而是输出窗口过于苛刻。选手若想使用虚空行者，需要搭配至少两个硬控英雄创造输出环境。</p>
+          <div class="highlight-box">当前版本中，控制时长超过 1.5 秒的英雄在禁用环节被针对的概率高达 67%。选择阵容时，优先保证至少一个稳定先手控，再考虑输出搭配。</div>
+          <h3>地图机制对战术选择的具体影响</h3>
+          <p>裂谷竞技场的地图结构由三条通道与中央草丛区构成。11 月 8 日热更新后，中央草丛的视野范围从 350 码缩减至 280 码，扫描冷却时间从 45 秒延长至 60 秒。这一改动直接削弱了依赖视野压制的速攻流：双刺客开局绕后路线的成功率从 71% 下降至 58%。</p>
+          <p>与此同时，防守反击体系受到的影响较小。岩盾守卫搭配远程消耗英雄的阵容，在视野受限时更倾向于收缩防线，利用地形狭窄处释放范围控制。数据显示，更新后防守反击阵容的胜率环比上升 2.1 个百分点。</p>
+          <ul>
+            <li>速攻流：依赖前期视野优势，更新后需要更谨慎地规划绕后时机。</li>
+            <li>控制流：受影响最小，霜语者仍是版本首选。</li>
+            <li>消耗流：在狭窄地形中发挥稳定，适合搭配重装前排。</li>
+          </ul>
+          <h3>积分规则与晋级策略</h3>
+          <p>每日大赛大乱斗采用单日积分制，每轮对决根据排名给予 10 至 1 分，单日总积分最高者获得当日冠军。赛季总积分排名前 64 的选手进入季度总决赛。值得注意的是，周中比赛积分权重为 1.0，周末特殊规则赛积分权重为 2.0，这意味着周末两天的表现对最终排名影响更大。</p>
+          <p>从历史数据看，赛季总冠军的平均单日积分为 48.6 分，且至少获得过 8 次单日冠军。选手在周中比赛往往采取更保守的策略，确保稳定拿分；而周末则倾向高风险高回报的阵容。这种节奏差异使得赛季末的积分争夺极具变数。</p>
+        </div>
+      </section>
+
+      <!-- 6. 体验指南 / 观赛路径 -->
+      <section class="section" id="guide">
+        <div class="section-header">
+          <h2>观赛与内容消费路径</h2>
+        </div>
+        <div class="guide-steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>先确认当日赛制与英雄池</h4>
+              <p>每日大赛大乱斗的规则可能因日期不同而变化。常规赛采用标准禁用流程，周末特殊赛则可能取消禁用或启用双倍积分。观赛前先查看当日公告，了解英雄池范围和积分权重，才能准确判断选手策略的合理性。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>从选手数据面板入手判断对局质量</h4>
+              <p>每场对决结束后，选手的击杀、助攻、参团率和伤害占比会生成数据面板。参团率高于 70% 的选手通常更积极地参与团队作战，而伤害占比超过 35% 则说明该选手是队伍的核心输出点。对比双方数据面板，可以快速判断对局是碾压还是翻盘。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>根据英雄梯度选择重点场次</h4>
+              <p>霜语者、岩盾守卫、影刃等 T1 英雄出场的对局通常更具参考价值。如果你关注版本趋势，优先观看包含这些英雄的场次；如果你想学习冷门战术，可以筛选虚空行者或熔岩巨人的对局，观察高分段选手如何处理劣势对线。</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h4>结合评论与复盘判断投入时间</h4>
+              <p>一场对局是否值得完整观看，可以参考社区评论和复盘摘要。如果评论中频繁出现“翻盘”“极限操作”等具体描述，说明对局过程有较高观赏性；如果复盘摘要指出双方阵容存在明显克制关系，则更适合学习阵容搭配思路。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <h2>常见问题</h2>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>每日大赛大乱斗一般每天几点开始？</summary>
+            <div class="faq-body">常规比赛日通常在晚上 19:00 开始首轮对决，每日进行 6 至 8 轮，预计 22:30 左右结束。周末特殊规则赛会提前至 18:00 开始，具体时间以当日赛事公告为准。</div>
+          </details>
+          <details class="faq-item">
+            <summary>霜语者和虚空行者有什么区别？新手更适合哪个？</summary>
+            <div class="faq-body">霜语者主打范围控制，冰环可眩晕 1.8 秒，操作门槛较低，适合新手快速参与团战。虚空行者偏向单体爆发，但技能前摇较长，需要预判和走位配合，更适合有一定基础的玩家。新手建议从霜语者或岩盾守卫入手。</div>
+          </details>
+          <details class="faq-item">
+            <summary>第一次看大乱斗比赛，从哪个场次开始比较好？</summary>
+            <div class="faq-body">建议从当日精选对决中的「控制流」或「防守反击」场次开始。这类对局节奏相对清晰，阵容搭配容易理解，适合初次接触的观众。周末特殊规则赛虽然积分权重高，但规则变化较多，可以稍后再看。</div>
+          </details>
+          <details class="faq-item">
+            <summary>英雄胜率榜多久更新一次？</summary>
+            <div class="faq-body">英雄胜率榜每日更新一次，数据来源为前一个比赛日的全部对局记录。每周一还会发布周度汇总，统计过去 7 天的英雄出场率、禁用率和胜率变化，便于观察版本趋势。</div>
+          </details>
+          <details class="faq-item">
+            <summary>大乱斗的积分是怎么计算的？</summary>
+            <div class="faq-body">每轮对决根据最终排名给予积分：第一名 10 分、第二名 8 分、第三名 6 分，以此类推至第八名 1 分。常规比赛日积分权重为 1.0，周末特殊规则赛权重为 2.0。单日总积分最高者获得当日冠军。</div>
+          </details>
+          <details class="faq-item">
+            <summary>选手「夜风」常用的英雄有哪些？</summary>
+            <div class="faq-body">夜风本赛季使用最多的英雄是霜语者（出场 47 次）和岩盾守卫（出场 42 次），两者合计占其总出场次数的 62.7%。此外他在特定地图中也会选择影刃作为变阵选择，但使用频率较低。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section class="section" id="comments">
+        <div class="section-header">
+          <h2>玩家评论</h2>
+        </div>
+        <div class="comment-list">
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">冰</span><span class="comment-nick">冰环不空</span><span class="comment-date">今天 21:45</span></div>
+            <p class="comment-text">夜风那场霜语者残血冰环控三个真的离谱，我反复看了三遍回放。这种操作在王者组也算名场面了。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">铁</span><span class="comment-nick">铁壁老粉</span><span class="comment-date">今天 20:12</span></div>
+            <p class="comment-text">铁壁的熔岩巨人卡位教学什么时候出啊？新手组那个 1v3 翻盘我看了五遍还是没学会走位。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">影</span><span class="comment-nick">影刃冲冲冲</span><span class="comment-date">今天 19:30</span></div>
+            <p class="comment-text">双刺客速攻流现在视野被削了，成功率掉到 58% 了，影刃自己都说要调整路线。不过周末无禁用赛应该还能用。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">虚</span><span class="comment-nick">虚空行者爱好者</span><span class="comment-date">今天 18:05</span></div>
+            <p class="comment-text">虚空行者胜率 47.3% 也太惨了，我打了几把确实前摇太长，对面霜语者一冻一个准。求加强。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">数</span><span class="comment-nick">数据看板</span><span class="comment-date">今天 16:40</span></div>
+            <p class="comment-text">参团率 78.4% 这个数据有点夸张，夜风基本每波团都在。不过他的伤害占比只有 28%，说明队伍输出点比较分散。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">新</span><span class="comment-nick">新手小张</span><span class="comment-date">今天 15:22</span></div>
+            <p class="comment-text">刚入坑，想问一下周末的特殊规则赛没有禁用的话，是不是霜语者会被抢爆？那我练岩盾守卫能行吗？</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">草</span><span class="comment-nick">草丛伦</span><span class="comment-date">今天 14:10</span></div>
+            <p class="comment-text">中路草丛视野削了之后速攻流确实难受，以前绕后成功率很高的。现在扫描 60 秒一个，节奏完全不一样了。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">积</span><span class="comment-nick">积分计算器</span><span class="comment-date">今天 12:55</span></div>
+            <p class="comment-text">周末双倍积分太关键了，夜风现在 312 分，如果周末拿两个冠军基本就锁定周冠了。铁壁得加把劲。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">岩</span><span class="comment-nick">岩盾守護</span><span class="comment-date">今天 11:30</span></div>
+            <p class="comment-text">岩盾守卫的护盾反击在这个版本真的强，尤其是配合霜语者打反手。我钻石组用这个组合胜率有 60% 左右。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">疾</span><span class="comment-nick">疾风知劲草</span><span class="comment-date">今天 10:15</span></div>
+            <p class="comment-text">影刃那个 90 秒速推视频看了，路线规划确实细，但要求两个刺客同步率极高，路人局很难复刻。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">观</span><span class="comment-nick">观赛不熬夜</span><span class="comment-date">昨天 23:40</span></div>
+            <p class="comment-text">每天 19 点开始不错，看完刚好睡觉。周末 18 点开始稍微有点早，下班赶不上第一轮。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">版</span><span class="comment-nick">版本风向标</span><span class="comment-date">昨天 22:18</span></div>
+            <p class="comment-text">虚空行者前摇问题不解决，胜率很难上 50%。不过下个补丁据说要减 0.1 秒前摇，可以观望一下。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">翻</span><span class="comment-nick">翻盘小能手</span><span class="comment-date">11 月 7 日</span></div>
+            <p class="comment-text">铁壁那个 1v3 翻盘最精彩的是他利用地形卡视野，熔岩巨人模型大但贴墙走反而有优势，学到了。</p>
+          </div>
+          <div class="comment-item">
+            <div class="comment-head"><span class="comment-avatar">数</span><span class="comment-nick">数据流玩家</span><span class="comment-date">11 月 7 日</span></div>
+            <p class="comment-text">186 场样本量不算大，霜语者 56.2% 胜率还需要更多数据验证。不过禁用率 43% 确实能说明问题。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section class="section" id="news">
+        <div class="section-header">
+          <h2>相关资讯</h2>
+        </div>
+        <div class="news-list">
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/daluandou-news01/600/400" alt="周末特殊规则赛对阵表发布公告图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">周末「双倍积分·无禁用」规则赛对阵表出炉</h3>
+              <p class="news-summary">64 名选手参赛，首轮焦点战夜风对阵影刃。无禁用规则下霜语者、影刃等热门英雄预计登场率大幅上升。</p>
+              <span class="news-date">2026-11-08</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/daluandou-news02/600/400" alt="英雄胜率周榜数据图示" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">11 月首周英雄胜率榜：霜语者 56.2% 登顶，虚空行者垫底</h3>
+              <p class="news-summary">基于 186 场对局统计，控制型英雄整体胜率走高。新英雄虚空行者首周胜率仅 47.3%，技能前摇问题突出。</p>
+              <span class="news-date">2026-11-07</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/daluandou-news03/600/400" alt="裂谷竞技场地图视野范围调整示意图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">裂谷竞技场视野机制热更新：草丛范围缩减至 280 码</h3>
+              <p class="news-summary">扫描冷却延长至 60 秒，速攻流绕后成功率下降。防守反击体系胜率环比上升 2.1 个百分点。</p>
+              <span class="news-date">2026-11-08</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/daluandou-news04/600/400" alt="选手夜风赛季数据统计图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">选手夜风赛季参团率 78.4%，领跑王者组</h3>
+              <p class="news-summary">142 场对局，场均击杀 4.2、助攻 7.8。霜语者与岩盾守卫合计出场 89 次，是其最稳定的上分组合。</p>
+              <span class="news-date">2026-11-07</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/daluandou-news05/600/400" alt="双刺客速攻流教学视频封面" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">双刺客速攻流教学视频播放量突破 8 万</h3>
+              <p class="news-summary">影刃亲自解说开局 90 秒路线规划与集火时机，评论区讨论集中在路线同步率与视野风险两个方向。</p>
+              <span class="news-date">2026-11-05</span>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-thumb" src="https://picsum.photos/seed/daluandou-news06/600/400" alt="第13周冠军奖励发放公告配图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3 class="news-title">第 13 周冠军奖励发放：夜风获限定头像框</h3>
+              <p class="news-summary">除头像框外，冠军还获得英雄皮肤自选箱。第 14 周积分争夺仍在继续，夜风目前以 312 分领跑。</p>
+              <span class="news-date">2026-11-06</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section class="section" id="recommend">
+        <div class="section-header">
+          <h2>延伸内容方向</h2>
+        </div>
+        <div class="tag-cloud">
+          <a href="/#deep-dive">霜语者冰环控制时长详解</a>
+          <a href="/#guide">新手英雄选择优先级</a>
+          <a href="/#deep-dive">岩盾守卫护盾反击机制</a>
+          <a href="/#featured">影刃三段位移路线图</a>
+          <a href="/#faq">周末特殊规则赛禁用取消影响</a>
+          <a href="/#latest">裂谷竞技场视野热更新汇总</a>
+          <a href="/#comments">熔岩巨人地形卡位技巧</a>
+          <a href="/#news">虚空行者前摇调整预测</a>
+        </div>
+      </section>
+
+      <!-- 11. 补充板块：热门榜单 -->
+      <section class="section" id="ranking">
+        <div class="section-header">
+          <h2>本周选手积分榜（截至 11 月 8 日）</h2>
+        </div>
+        <div class="compact-list">
+          <div class="compact-item"><span class="compact-num">1</span><div class="compact-body"><div class="compact-title">夜风</div><div class="compact-summary">王者组 · 霜语者/岩盾守卫 · 单日最高 68 分</div></div><span class="compact-time">312 分</span></div>
+          <div class="compact-item"><span class="compact-num">2</span><div class="compact-body"><div class="compact-title">铁壁</div><div class="compact-summary">王者组 · 熔岩巨人/岩盾守卫 · 单日最高 61 分</div></div><span class="compact-time">285 分</span></div>
+          <div class="compact-item"><span class="compact-num">3</span><div class="compact-body"><div class="compact-title">影刃</div><div class="compact-summary">钻石组 · 影刃/疾风 · 单日最高 57 分</div></div><span class="compact-time">264 分</span></div>
+          <div class="compact-item"><span class="compact-num">4</span><div class="compact-body"><div class="compact-title">疾风</div><div class="compact-summary">钻石组 · 疾风/影刃 · 单日最高 55 分</div></div><span class="compact-time">251 分</span></div>
+          <div class="compact-item"><span class="compact-num">5</span><div class="compact-body"><div class="compact-title">霜降</div><div class="compact-summary">铂金组 · 霜语者/虚空行者 · 单日最高 52 分</div></div><span class="compact-time">238 分</span></div>
+          <div class="compact-item"><span class="compact-num">6</span><div class="compact-body"><div class="compact-title">岩心</div><div class="compact-summary">铂金组 · 岩盾守卫/熔岩巨人 · 单日最高 49 分</div></div><span class="compact-time">226 分</span></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右侧辅助栏 -->
+    <aside class="right-sidebar" aria-label="辅助信息">
+      <div class="sidebar-card">
+        <h3>今日热榜 TOP 5</h3>
+        <div class="hot-list">
+          <div class="hot-list-item"><span class="rank">1</span><a href="/#featured">霜语者+岩盾守卫 7 连胜</a></div>
+          <div class="hot-list-item"><span class="rank">2</span><a href="/#featured">铁壁 1v3 残局翻盘</a></div>
+          <div class="hot-list-item"><span class="rank">3</span><a href="/#featured">双刺客 90 秒速推战术</a></div>
+          <div class="hot-list-item"><span class="rank">4</span><a href="/#deep-dive">霜语者冰环控制链解析</a></div>
+          <div class="hot-list-item"><span class="rank">5</span><a href="/#latest">周末无禁用规则赛对阵</a></div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <h3>更新流</h3>
+        <div class="update-stream">
+          <div class="update-item"><span class="u-title">第 14 周周三积分赛结束</span><span class="u-time">今天 21:30</span></div>
+          <div class="update-item"><span class="u-title">霜语者首周禁用率 43%</span><span class="u-time">今天 18:15</span></div>
+          <div class="update-item"><span class="u-title">周末特殊规则赛对阵公布</span><span class="u-time">今天 16:00</span></div>
+          <div class="update-item"><span class="u-title">裂谷竞技场视野热更新</span><span class="u-time">今天 09:20</span></div>
+          <div class="update-item"><span class="u-title">铁壁翻盘片段播放量 12 万</span><span class="u-time">昨天 22:10</span></div>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <h3>英雄梯度速览</h3>
+        <div class="hot-list">
+          <div class="hot-list-item"><span class="rank">T1</span><a href="/#deep-dive">霜语者 · 56.2%</a></div>
+          <div class="hot-list-item"><span class="rank">T1</span><a href="/#deep-dive">岩盾守卫 · 54.8%</a></div>
+          <div class="hot-list-item"><span class="rank">T2</span><a href="/#deep-dive">影刃 · 53.1%</a></div>
+          <div class="hot-list-item"><span class="rank">T2</span><a href="/#deep-dive">熔岩巨人 · 51.4%</a></div>
+          <div class="hot-list-item"><span class="rank">T3</span><a href="/#deep-dive">虚空行者 · 47.3%</a></div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand">51爆料每日大赛大乱斗</div>
+        <p>聚焦每日大乱斗赛事的对阵记录、选手数据、版本英雄梯度与规则解析，为赛事观众和参赛玩家提供可查阅的具体内容。</p>
+      </div>
+      <div class="footer-col">
+        <h4>赛事内容</h4>
+        <ul>
+          <li><a href="/#overview">赛事概览</a></li>
+          <li><a href="/#featured">精选对决</a></li>
+          <li><a href="/#latest">最新动态</a></li>
+          <li><a href="/#ranking">积分榜单</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>深度与指南</h4>
+        <ul>
+          <li><a href="/#deep-dive">版本解析</a></li>
+          <li><a href="/#guide">观赛路径</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">玩家评论</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>分类与资讯</h4>
+        <ul>
+          <li><a href="/#categories">英雄梯度</a></li>
+          <li><a href="/#categories">选手数据</a></li>
+          <li><a href="/#categories">战术复盘</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 51爆料每日大赛大乱斗 · 内容聚合展示</span>
+      <span>部分内容为示例数据，仅用于展示页面结构</span>
+    </div>
+  </footer>
+
+  <!-- 内联脚本 -->
+  <script>
+    (function() {
+      // 搜索面板切换
+      var toggle = document.getElementById('searchToggle');
+      var panel = document.getElementById('searchPanel');
+      var closeBtn = document.getElementById('searchClose');
+      var input = document.getElementById('searchInput');
+      var results = document.getElementById('searchResults');
+
+      if (toggle && panel) {
+        toggle.addEventListener('click', function() {
+          panel.classList.toggle('open');
+          if (panel.classList.contains('open') && input) {
+            input.focus();
+          }
+        });
+      }
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          if (panel) panel.classList.remove('open');
+        });
+      }
+
+      // 本地内容查找
+      if (input && results) {
+        input.addEventListener('input', function() {
+          var q = input.value.trim().toLowerCase();
+          if (!q) {
+            results.textContent = '';
+            return;
+          }
+          // 抓取页面主内容区的文本节点进行匹配
+          var mainContent = document.querySelector('.main-content');
+          if (!mainContent) return;
+          var text = mainContent.textContent || '';
+          var idx = text.toLowerCase().indexOf(q);
+          if (idx !== -1) {
+            var start = Math.max(0, idx - 20);
+            var end = Math.min(text.length, idx + q.length + 30);
+            var snippet = text.slice(start, end).replace(/\s+/g, ' ');
+            results.textContent = '找到匹配：…' + snippet + '…';
+          } else {
+            results.textContent = '未找到包含「' + input.value.trim() + '」的内容，请尝试其他关键词。';
+          }
+        });
+      }
+
+      // 点击搜索面板外关闭
+      document.addEventListener('click', function(e) {
+        if (panel && panel.classList.contains('open')) {
+          if (!panel.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+            panel.classList.remove('open');
+          }
+        }
+      });
+
+      // Escape 关闭
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && panel && panel.classList.contains('open')) {
+          panel.classList.remove('open');
+          if (toggle) toggle.focus();
+        }
+      });
+    })();
+  </script>
+
+</body>
+        </html>
