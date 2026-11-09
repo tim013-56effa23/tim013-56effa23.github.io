@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>国产茄子视频 - 热门剧集与短片聚合</title>
+  <meta name="description" content="国产茄子视频聚合近期热门国产剧集、微短剧和创作者短片，提供最新更新、分类入口与深度解析，适合影视爱好者快速浏览和筛选内容。">
+  <meta name="keywords" content="国产剧集,微短剧,创作者短片,影视聚合,热门影视">
+  <style>
+    /* ---------- 全局变量 ---------- */
+    :root {
+      --bg: #0b0e14;
+      --panel: #131a24;
+      --panel-light: #1c2533;
+      --border: #2a3442;
+      --text: #e6edf5;
+      --text-muted: #94a3b8;
+      --primary: #6d28d9;
+      --primary-soft: #8b5cf6;
+      --accent: #f59e0b;
+      --accent-soft: #fbbf24;
+      --success: #10b981;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.5);
+      --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+      --header-height: 64px;
+      --announce-height: 40px;
+      --sticky-offset: calc(var(--header-height) + var(--announce-height));
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ---------- 吸顶公告条 ---------- */
+    .announce-bar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      height: var(--announce-height);
+      background: linear-gradient(90deg, #1e1b4b, #4c1d95);
+      color: #e9d5ff;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      font-size: 0.875rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .announce-bar span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .announce-bar strong {
+      color: #fde68a;
+      font-weight: 600;
+    }
+
+    /* ---------- 吸顶页头 ---------- */
+    .site-header {
+      position: sticky;
+      top: var(--announce-height);
+      z-index: 50;
+      height: var(--header-height);
+      background: rgba(11, 14, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 32px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+    .logo svg {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      background: linear-gradient(135deg, #c4b5fd, #f0abfc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .main-nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      flex: 1;
+      scrollbar-width: none;
+    }
+    .main-nav::-webkit-scrollbar { display: none; }
+    .main-nav a {
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      background: var(--panel-light);
+      color: var(--text);
+      outline: 2px solid var(--primary-soft);
+      outline-offset: 2px;
+    }
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .search-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--panel-light);
+      display: grid;
+      place-items: center;
+      transition: background 0.2s;
+    }
+    .search-btn:hover { background: var(--primary); }
+    .search-btn svg { width: 18px; height: 18px; }
+
+    /* ---------- 布局容器 ---------- */
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      position: relative;
+      margin-top: 32px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      isolation: isolate;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 30%, rgba(139,92,246,0.25), transparent 55%),
+                  radial-gradient(circle at 10% 80%, rgba(245,158,11,0.12), transparent 50%);
+      z-index: -1;
+    }
+    .hero-content {
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      background: linear-gradient(120deg, #f5f3ff, #c4b5fd, #fbbf24);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover { background: #5b21b6; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: background 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-outline:hover { background: var(--panel-light); border-color: var(--primary-soft); }
+
+    .hero-visual {
+      position: absolute;
+      right: 40px;
+      bottom: 0;
+      width: 280px;
+      height: 280px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .hero-visual svg { width: 100%; height: 100%; }
+
+    /* ---------- 三栏门户布局 ---------- */
+    .portal-layout {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) 260px;
+      gap: 28px;
+      margin-top: 32px;
+      align-items: start;
+    }
+
+    /* 左侧频道索引 */
+    .channel-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 14px;
+    }
+    .channel-sidebar h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      padding-left: 8px;
+    }
+    .channel-list li a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: background 0.2s, color 0.2s;
+    }
+    .channel-list li a:hover,
+    .channel-list li a:focus-visible {
+      background: var(--panel-light);
+      color: var(--text);
+      outline: 2px solid var(--primary-soft);
+      outline-offset: 2px;
+    }
+
+    /* 右侧辅助栏 */
+    .aux-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .aux-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+    .aux-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: var(--accent-soft);
+      letter-spacing: 0.02em;
+    }
+    .rank-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .rank-list li:last-child { border-bottom: none; }
+    .rank-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--panel-light);
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .rank-list li:nth-child(1) .rank-num { background: var(--accent); color: #000; }
+    .rank-list li:nth-child(2) .rank-num { background: #94a3b8; color: #000; }
+    .rank-list li:nth-child(3) .rank-num { background: #b45309; color: #fff; }
+    .rank-title {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .rank-badge {
+      font-size: 0.7rem;
+      color: var(--success);
+      background: rgba(16,185,129,0.12);
+      padding: 2px 8px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+
+    /* 主内容区通用 */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      min-width: 0;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--primary-soft);
+      border-radius: 4px;
+    }
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: -10px;
+      margin-bottom: 18px;
+    }
+
+    /* 主题领域概览 */
+    .overview-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+    .overview-card p + p { margin-top: 12px; }
+    .overview-card strong { color: var(--text); font-weight: 600; }
+
+    /* 精选卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+    .content-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+    .content-card:hover { border-color: var(--primary-soft); transform: translateY(-2px); }
+    .card-img-wrap {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--panel-light);
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .content-card:hover .card-img-wrap img { transform: scale(1.04); }
+    .card-body {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .card-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--panel-light);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .tag.accent { background: rgba(245,158,11,0.15); color: var(--accent-soft); }
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+    .card-meta span:first-child { color: var(--success); }
+
+    /* 最新更新紧凑列表 */
+    .update-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .update-list li:last-child { border-bottom: none; }
+    .update-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      min-width: 68px;
+      flex-shrink: 0;
+    }
+    .update-title { font-weight: 500; flex: 1; min-width: 0; }
+    .update-badge {
+      font-size: 0.7rem;
+      background: rgba(16,185,129,0.12);
+      color: var(--success);
+      padding: 2px 8px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+    }
+    .category-item {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .category-item:hover { background: var(--panel-light); border-color: var(--primary-soft); }
+    .category-item .cat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--panel-light);
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 32px;
+    }
+    .deep-dive h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: var(--accent-soft);
+    }
+    .deep-dive h3:first-of-type { margin-top: 0; }
+    .deep-dive p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .deep-dive ul {
+      list-style: disc;
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .deep-dive ul li { margin-bottom: 6px; }
+
+    /* 体验指南 */
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      counter-reset: step;
+    }
+    .guide-step {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      position: relative;
+      counter-increment: step;
+    }
+    .guide-step::before {
+      content: counter(step);
+      position: absolute;
+      top: -12px;
+      left: 16px;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .guide-step h4 {
+      font-size: 0.95rem;
+      margin: 6px 0 8px;
+      font-weight: 600;
+    }
+    .guide-step p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* FAQ */
+    .faq-list details {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      padding: 0 18px;
+    }
+    .faq-list details[open] {
+      border-color: var(--primary-soft);
+    }
+    .faq-list summary {
+      padding: 16px 0;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-list details[open] summary::after { content: '−'; }
+    .faq-list .faq-answer {
+      padding: 0 0 16px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* 用户评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .comment-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .comment-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--panel-light);
+      display: grid;
+      place-items: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--primary-soft);
+      flex-shrink: 0;
+    }
+    .comment-name { font-weight: 600; font-size: 0.8rem; }
+    .comment-text { color: var(--text-muted); line-height: 1.6; }
+    .comment-meta { font-size: 0.7rem; color: #64748b; }
+
+    /* 相关资讯 */
+    .news-list li {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .news-list li:last-child { border-bottom: none; }
+    .news-thumb {
+      width: 100px;
+      height: 70px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--panel-light);
+    }
+    .news-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .news-body { flex: 1; min-width: 0; }
+    .news-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .news-date {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .news-summary {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* 相关推荐标签索引 */
+    .tag-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag-index a {
+      padding: 8px 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .tag-index a:hover {
+      background: var(--panel-light);
+      border-color: var(--primary-soft);
+      color: var(--text);
+    }
+
+    /* 补充板块：可信度分层 */
+    .trust-tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .tier-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+    .tier-card h4 {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tier-badge {
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .tier-a { background: rgba(16,185,129,0.18); color: #34d399; }
+    .tier-b { background: rgba(245,158,11,0.18); color: #fbbf24; }
+    .tier-c { background: rgba(148,163,184,0.18); color: #94a3b8; }
+    .tier-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 页尾 */
+    .site-footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+      background: var(--panel);
+      padding: 40px 0 24px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 12px;
+      max-width: 320px;
+    }
+    .footer-col h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .footer-col li {
+      margin-bottom: 8px;
+    }
+    .footer-col li a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-col li a:hover { color: var(--text); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 1024px) {
+      .portal-layout {
+        grid-template-columns: minmax(0, 1fr) 260px;
+      }
+      .channel-sidebar {
+        display: none;
+      }
+      .hero { padding: 40px 32px; }
+      .hero-visual { width: 200px; height: 200px; right: 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 740px) {
+      .portal-layout {
+        grid-template-columns: 1fr;
+      }
+      .aux-sidebar {
+        position: static;
+        order: 2;
+      }
+      .main-content { order: 1; }
+      .site-header { gap: 12px; padding: 0 16px; }
+      .logo { font-size: 1.05rem; }
+      .logo svg { width: 26px; height: 26px; }
+      .main-nav { gap: 2px; }
+      .main-nav a { padding: 6px 10px; font-size: 0.8rem; }
+      .header-actions { display: none; }
+      .hero { padding: 32px 20px; margin-top: 16px; }
+      .hero h1 { font-size: 2rem; }
+      .hero-visual { display: none; }
+      .container { padding: 0 16px; }
+      .deep-dive { padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .card-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+      .comment-grid { grid-template-columns: 1fr; }
+      .category-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+      .guide-steps { grid-template-columns: 1fr; }
+      .trust-tiers { grid-template-columns: 1fr; }
+      .news-list li { flex-direction: column; gap: 8px; }
+      .news-thumb { width: 100%; height: 120px; }
+    }
+
+    /* 焦点可见 */
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--accent-soft);
+      outline-offset: 2px;
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 -->
+<div class="announce-bar" role="banner">
+  <span><strong>本周新增 12 部国产剧集</strong> · 《暗涌追凶》《春不晚》等已上线 · 微短剧专区更新 8 条</span>
+</div>
+
+<!-- 吸顶页头 -->
+<header class="site-header">
+  <a href="/#hero" class="logo" aria-label="国产茄子视频首页">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="36" height="36" rx="10" fill="#6d28d9"/>
+      <path d="M14 12 L14 28 L28 20 Z" fill="#fbbf24"/>
+      <circle cx="30" cy="10" r="4" fill="#a78bfa"/>
+    </svg>
+    <span class="logo-text">国产茄子视频</span>
+  </a>
+  <nav class="main-nav" aria-label="主题导航">
+    <a href="/#featured">精选推荐</a>
+    <a href="/#updates">最新更新</a>
+    <a href="/#categories">分类入口</a>
+    <a href="/#deep-dive">深度解析</a>
+    <a href="/#guide">观看指南</a>
+    <a href="/#faq">常见问题</a>
+    <a href="/#news">相关资讯</a>
+  </nav>
+  <div class="header-actions">
+    <button class="search-btn" aria-label="搜索内容" onclick="document.getElementById('search-input')?.focus()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- 首屏 -->
+  <section id="hero" class="container" style="padding-top:0;">
+    <div class="hero">
+      <div class="hero-content">
+        <h1>国产茄子视频</h1>
+        <p class="hero-desc">汇聚近期上线的国产剧集、竖屏微短剧与创作者短片，提供分类筛选、更新追踪和观看顺序参考，适合想快速找到下一部可看内容的观众。</p>
+        <div class="hero-actions">
+          <a href="/#featured" class="btn-primary">浏览精选内容</a>
+          <a href="/#updates" class="btn-outline">查看今日更新</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="160" height="100" rx="12" fill="#1e1b4b" stroke="#8b5cf6" stroke-width="1.5"/>
+          <path d="M80 70 L80 110 L120 90 Z" fill="#fbbf24" opacity="0.8"/>
+          <circle cx="160" cy="60" r="6" fill="#a78bfa" opacity="0.6"/>
+          <circle cx="40" cy="130" r="4" fill="#f472b6" opacity="0.5"/>
+          <rect x="30" y="150" width="60" height="6" rx="3" fill="#334155"/>
+          <rect x="100" y="150" width="40" height="6" rx="3" fill="#334155"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 三栏门户布局 -->
+  <div class="container portal-layout">
+
+    <!-- 左侧频道索引 -->
+    <aside class="channel-sidebar" aria-label="频道索引">
+      <h2>频道索引</h2>
+      <ul class="channel-list">
+        <li><a href="/#featured">悬疑推理</a></li>
+        <li><a href="/#featured">都市情感</a></li>
+        <li><a href="/#featured">古装权谋</a></li>
+        <li><a href="/#featured">竖屏微短剧</a></li>
+        <li><a href="/#featured">创作者短片</a></li>
+        <li><a href="/#featured">科幻脑洞</a></li>
+        <li><a href="/#featured">轻喜剧</a></li>
+        <li><a href="/#featured">年代传奇</a></li>
+        <li><a href="/#categories">全部类型</a></li>
+      </ul>
+    </aside>
+
+    <!-- 中主内容 -->
+    <div class="main-content">
+
+      <!-- 1. 主题领域概览 -->
+      <section id="overview">
+        <h2 class="section-title">国产剧集与短片领域概览</h2>
+        <div class="overview-card">
+          <p><strong>国产茄子视频</strong>关注的内容方向涵盖长篇剧集、竖屏微短剧和创作者自制短片三大类。长篇剧集以悬疑推理、都市情感和古装权谋为近期热门类型，单集时长 40—45 分钟，适合连续追看；竖屏微短剧单集 1—3 分钟，节奏紧凑，多在通勤或碎片时间消费；创作者短片则集中在科幻脑洞和轻喜剧两个方向，时长 5—15 分钟，风格更个人化。</p>
+          <p>近期值得关注的条目包括悬疑剧《暗涌追凶》、都市情感剧《春不晚》、古装权谋剧《凤鸣长安》，以及微短剧《外卖员的午夜订单》《合租室友是AI》。创作者短片方面，《最后一班地铁》和《像素恋人》在社区讨论度较高。这些内容在叙事密度、更新节奏和观看门槛上差异明显，选择时需要结合可投入的时间和对类型的偏好来判断。</p>
+        </div>
+      </section>
+
+      <!-- 2. 精选内容推荐 -->
+      <section id="featured">
+        <h2 class="section-title">精选内容推荐</h2>
+        <p class="section-sub">近期讨论度较高的具体条目，涵盖剧集、微短剧和创作者短片。</p>
+        <div class="card-grid">
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/anyong-xiong01/400/300" alt="暗涌追凶剧集封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">暗涌追凶</div>
+              <div class="card-tags">
+                <span class="tag accent">悬疑推理</span>
+                <span class="tag">刑侦</span>
+                <span class="tag">12集</span>
+              </div>
+              <p class="card-desc">一桩十年前的沉船案重新浮出水面，刑警与记者双线追查。前六集埋线密集，适合喜欢社会派推理的观众。</p>
+              <div class="card-meta"><span>更新至第8集</span><span>热度 9.2</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/chunbuwan02/400/300" alt="春不晚剧集封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">春不晚</div>
+              <div class="card-tags">
+                <span class="tag accent">都市情感</span>
+                <span class="tag">职场</span>
+                <span class="tag">24集</span>
+              </div>
+              <p class="card-desc">两位前同事在社区改造项目中重逢，从对立到协作。感情线克制，职场细节扎实，适合偏好慢热叙事的观众。</p>
+              <div class="card-meta"><span>已完结</span><span>评分 8.7</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/fengming-changan03/400/300" alt="凤鸣长安剧集封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">凤鸣长安</div>
+              <div class="card-tags">
+                <span class="tag accent">古装权谋</span>
+                <span class="tag">宫廷</span>
+                <span class="tag">36集</span>
+              </div>
+              <p class="card-desc">以女官视角展开的朝堂博弈，前朝与后宫双线交织。服化道考究，权谋逻辑清晰，适合喜欢群像权谋的观众。</p>
+              <div class="card-meta"><span>更新至第22集</span><span>热度 8.9</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/waimaiyuan04/400/300" alt="外卖员的午夜订单微短剧封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">外卖员的午夜订单</div>
+              <div class="card-tags">
+                <span class="tag accent">竖屏微短剧</span>
+                <span class="tag">悬疑</span>
+                <span class="tag">单集3分钟</span>
+              </div>
+              <p class="card-desc">深夜外卖员接到一串诡异的送餐地址，每个订单都指向同一栋废弃居民楼。竖屏构图强化压迫感，适合碎片时间观看。</p>
+              <div class="card-meta"><span>全20集上线</span><span>热度 8.5</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/hezu-sheyou05/400/300" alt="合租室友是AI微短剧封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">合租室友是AI</div>
+              <div class="card-tags">
+                <span class="tag accent">轻喜剧</span>
+                <span class="tag">科幻</span>
+                <span class="tag">微短剧</span>
+              </div>
+              <p class="card-desc">程序员意外与一台家政机器人成为合租室友，日常摩擦中逐渐建立默契。每集一个生活小矛盾，轻松下饭。</p>
+              <div class="card-meta"><span>更新至第14集</span><span>评分 8.1</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/zuihou-ditie06/400/300" alt="最后一班地铁创作者短片封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">最后一班地铁</div>
+              <div class="card-tags">
+                <span class="tag accent">创作者短片</span>
+                <span class="tag">科幻</span>
+                <span class="tag">15分钟</span>
+              </div>
+              <p class="card-desc">末班地铁驶入一条不存在的线路，乘客发现彼此记忆互相矛盾。单场景科幻悬疑，适合喜欢头脑风暴的观众。</p>
+              <div class="card-meta"><span>已上线</span><span>热度 8.8</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/xiangsu-lianren07/400/300" alt="像素恋人创作者短片封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">像素恋人</div>
+              <div class="card-tags">
+                <span class="tag accent">创作者短片</span>
+                <span class="tag">爱情</span>
+                <span class="tag">10分钟</span>
+              </div>
+              <p class="card-desc">一段发生在复古游戏世界里的跨次元恋爱，像素画风与真人表演交替呈现。情感推进细腻，适合短片爱好者。</p>
+              <div class="card-meta"><span>已上线</span><span>评分 8.4</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <div class="card-img-wrap">
+              <img src="https://picsum.photos/seed/niandai-chuanqi08/400/300" alt="铁轨旁的夏天剧集封面" width="400" height="300" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="card-title">铁轨旁的夏天</div>
+              <div class="card-tags">
+                <span class="tag accent">年代传奇</span>
+                <span class="tag">成长</span>
+                <span class="tag">30集</span>
+              </div>
+              <p class="card-desc">九十年代铁路子弟的成长群像，围绕一次车站改建展开。细节还原度高，适合喜欢怀旧年代剧的观众。</p>
+              <div class="card-meta"><span>已完结</span><span>评分 9.0</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. 最新更新 -->
+      <section id="updates">
+        <h2 class="section-title">今日更新动态</h2>
+        <ul class="update-list">
+          <li><span class="update-time">今天 09:30</span><span class="update-title">《暗涌追凶》第8集上线</span><span class="update-badge">新集</span></li>
+          <li><span class="update-time">今天 10:15</span><span class="update-title">《凤鸣长安》第22集更新</span><span class="update-badge">新集</span></li>
+          <li><span class="update-time">今天 11:00</span><span class="update-title">微短剧《外卖员的午夜订单》全20集放出</span><span class="update-badge">完结</span></li>
+          <li><span class="update-time">今天 12:40</span><span class="update-title">《合租室友是AI》第14集上线</span><span class="update-badge">新集</span></li>
+          <li><span class="update-time">昨天 20:00</span><span class="update-title">创作者短片《像素恋人》导演剪辑版发布</span><span class="update-badge">新版本</span></li>
+          <li><span class="update-time">昨天 18:30</span><span class="update-title">《春不晚》番外篇《搬家那天》上线</span><span class="update-badge">番外</span></li>
+          <li><span class="update-time">11月6日</span><span class="update-title">《铁轨旁的夏天》幕后特辑更新</span><span class="update-badge">花絮</span></li>
+          <li><span class="update-time">11月5日</span><span class="update-title">悬疑剧《雾港》首支预告发布</span><span class="update-badge">预告</span></li>
+          <li><span class="update-time">11月4日</span><span class="update-title">微短剧《时间典当行》第1—5集上线</span><span class="update-badge">新剧</span></li>
+          <li><span class="update-time">11月3日</span><span class="update-title">《暗涌追凶》第7集弹幕破10万</span><span class="update-badge">热度</span></li>
+        </ul>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section id="categories">
+        <h2 class="section-title">按类型浏览</h2>
+        <div class="category-grid">
+          <a href="/#featured" class="category-item"><span class="cat-icon">🔍</span>悬疑推理</a>
+          <a href="/#featured" class="category-item"><span class="cat-icon">💼</span>都市情感</a>
+          <a href="/#featured" class="category-item"><span class="cat-icon">👑</span>古装权谋</a>
+          <a href="/#featured" class="category-item"><span class="cat-icon">📱</span>竖屏微短剧</a>
+          <a href="/#featured" class="category-item"><span class="cat-icon">🎬</span>创作者短片</a>
+          <a href="/#featured" class="category-item"><span class="cat-icon">🚀</span>科幻脑洞</a>
+          <a href="/#featured" class="category-item"><span class="cat-icon">😄</span>轻喜剧</a>
+          <a href="/#featured" class="category-item"><span class="cat-icon">📺</span>年代传奇</a>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析正文 -->
+      <section id="deep-dive">
+        <h2 class="section-title">深度解析：国产剧集与短片的类型差异与选择逻辑</h2>
+        <div class="deep-dive">
+          <h3>长篇剧集与微短剧的叙事节奏差异</h3>
+          <p>长篇剧集如《暗涌追凶》和《凤鸣长安》通常采用多线叙事，单集 40—45 分钟，前两集用于建立世界观和人物关系，关键冲突在第三至五集展开。这类内容适合连续投入时间，观看时需要留意伏笔和人物动机的细节铺垫。相比之下，竖屏微短剧《外卖员的午夜订单》单集仅 1—3 分钟，每集结尾设置钩子，冲突密度高，但人物塑造空间有限。选择时可以根据可支配的连续时间来判断：有整块时间优先长篇，碎片时间优先微短剧。</p>
+          <h3>悬疑推理与古装权谋的观看门槛</h3>
+          <p>悬疑推理类对逻辑连贯性要求较高，《暗涌追凶》前六集埋设了三条时间线，如果跳集观看容易丢失关键线索。古装权谋类则需要一定的背景知识储备，《凤鸣长安》涉及官职体系和朝堂派系，开场两集人物密集出场，建议按顺序观看并注意人物关系的递进。两者都属于需要专注观看的类型，不适合作为背景音。</p>
+          <h3>创作者短片的独特价值</h3>
+          <p>创作者短片如《最后一班地铁》和《像素恋人》时长 10—15 分钟，通常聚焦单一概念或情感瞬间，制作规格不及长篇剧集，但在创意密度和个人风格上更具辨识度。适合在看完长篇剧集后作为调剂，或用于发现新的叙事手法。这类内容的评判标准更偏向概念完整性和情感传达，而非制作规模。</p>
+          <ul>
+            <li>长篇剧集优先看前两集判断叙事节奏是否合拍</li>
+            <li>微短剧可先看第 1、5、10 集感受冲突密度</li>
+            <li>创作者短片适合按导演或主题集中观看</li>
+            <li>古装权谋剧建议先了解基本人物关系图再进入正片</li>
+          </ul>
+          <h3>更新节奏与追更策略</h3>
+          <p>目前多数长篇剧集保持每周更新 2—3 集的节奏，《暗涌追凶》每周二、五更新，《凤鸣长安》每周三、六更新。微短剧倾向于一次性放出全季或半季，适合完结后集中观看。追更时建议关注每集结尾的预告和更新时间表，避免在关键悬念处中断过久影响观看体验。</p>
+        </div>
+      </section>
+
+      <!-- 6. 体验指南 -->
+      <section id="guide">
+        <h2 class="section-title">观看顺序与选择指南</h2>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <h4>先确定可用时间</h4>
+            <p>有整块 40 分钟以上时间优先选择长篇剧集；只有碎片时间则从竖屏微短剧或创作者短片入手。</p>
+          </div>
+          <div class="guide-step">
+            <h4>再判断类型偏好</h4>
+            <p>喜欢逻辑推演选悬疑推理，偏好人物关系选都市情感，热衷群像博弈选古装权谋。</p>
+          </div>
+          <div class="guide-step">
+            <h4>试看首集或前两集</h4>
+            <p>长篇剧集通过前两集判断叙事节奏和人物吸引力；微短剧试看第 1 集感受钩子强度。</p>
+          </div>
+          <div class="guide-step">
+            <h4>参考更新状态做决定</h4>
+            <p>已完结条目适合集中观看，连载中条目需要考虑追更耐心和等待间隔。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section id="faq">
+        <h2 class="section-title">常见问题</h2>
+        <div class="faq-list">
+          <details>
+            <summary>悬疑剧《暗涌追凶》一般多久更新一次？</summary>
+            <div class="faq-answer">目前保持每周二、周五各更新一集，每集 42 分钟左右。截至 2026 年 11 月 8 日已更新至第 8 集，全季共 12 集。</div>
+          </details>
+          <details>
+            <summary>《春不晚》和《合租室友是AI》有什么区别？</summary>
+            <div class="faq-answer">《春不晚》是 24 集长篇都市情感剧，单集 40 分钟，侧重职场与感情线交织；《合租室友是AI》是竖屏微短剧，单集 3 分钟，以轻喜剧方式呈现人与机器人的日常。前者适合连续追看，后者适合碎片时间。</div>
+          </details>
+          <details>
+            <summary>第一次接触国产竖屏微短剧，从哪部开始看比较好？</summary>
+            <div class="faq-answer">如果偏好悬疑氛围，可以从《外卖员的午夜订单》开始，全 20 集已完结，单集 3 分钟；如果偏好轻松日常，《合租室友是AI》更合适，目前更新至第 14 集。</div>
+          </details>
+          <details>
+            <summary>古装权谋剧《凤鸣长安》需要提前了解什么背景？</summary>
+            <div class="faq-answer">主要涉及三省六部的官职体系和后宫与前朝的联动关系。前两集人物出场密集，建议留意角色之间的上下级关系和派系归属，后续剧情会围绕这些关系展开。</div>
+          </details>
+          <details>
+            <summary>创作者短片通常多长，评判标准是什么？</summary>
+            <div class="faq-answer">创作者短片一般在 5—15 分钟，常见于科幻脑洞和情感小品两个方向。评判时更看重概念完整度、情感传达和叙事效率，而非制作规模或演员阵容。</div>
+          </details>
+          <details>
+            <summary>国产茄子视频上最近有哪些已完结可以一次性看完的条目？</summary>
+            <div class="faq-answer">已完结的条目包括《春不晚》（24 集）、《外卖员的午夜订单》（20 集）、《铁轨旁的夏天》（30 集），以及创作者短片《最后一班地铁》《像素恋人》。适合希望一次性看完的观众。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section id="comments">
+        <h2 class="section-title">用户评论</h2>
+        <div class="comment-grid">
+          <div class="comment-card"><div class="comment-user"><span class="avatar">林</span><span class="comment-name">林深见鹿</span></div><p class="comment-text">《暗涌追凶》第 8 集的反转没想到，前面埋的记者线终于接上了。等周五更新。</p><div class="comment-meta">今天 10:22</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">陈</span><span class="comment-name">陈小满</span></div><p class="comment-text">《春不晚》职场部分写得很实，没有硬凑感情戏，结尾稍微仓促了一点。</p><div class="comment-meta">今天 09:05</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">王</span><span class="comment-name">王不留行</span></div><p class="comment-text">《凤鸣长安》第 22 集朝堂对峙好看，但前几集人物太多确实容易脸盲。</p><div class="comment-meta">昨天 22:40</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">赵</span><span class="comment-name">赵四喜</span></div><p class="comment-text">《外卖员的午夜订单》竖屏看确实有代入感，地铁上一口气刷了 8 集。</p><div class="comment-meta">昨天 21:10</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">周</span><span class="comment-name">周周周</span></div><p class="comment-text">《合租室友是AI》比较轻松，适合吃饭的时候看，不用太动脑。</p><div class="comment-meta">昨天 19:33</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">吴</span><span class="comment-name">吴一一</span></div><p class="comment-text">《最后一班地铁》的设定有点老套，但节奏控制得不错，15 分钟没拖。</p><div class="comment-meta">11月7日 16:20</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">郑</span><span class="comment-name">郑在听</span></div><p class="comment-text">《像素恋人》像素画风和真人切换挺有意思，结局有点仓促。</p><div class="comment-meta">11月7日 14:05</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">孙</span><span class="comment-name">孙大圣</span></div><p class="comment-text">《铁轨旁的夏天》细节还原太好了，铁路子弟看哭了。</p><div class="comment-meta">11月6日 20:15</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">李</span><span class="comment-name">李默然</span></div><p class="comment-text">《暗涌追凶》前六集信息量很大，建议不要跳着看，容易漏线索。</p><div class="comment-meta">11月6日 11:48</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">刘</span><span class="comment-name">刘浪浪</span></div><p class="comment-text">微短剧节奏快是真的，但有些转场太硬了，希望后续制作能提升。</p><div class="comment-meta">11月5日 22:30</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">黄</span><span class="comment-name">黄小仙</span></div><p class="comment-text">《春不晚》番外篇《搬家那天》补了男女主的后续，挺温馨的。</p><div class="comment-meta">11月5日 18:02</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">马</span><span class="comment-name">马不停</span></div><p class="comment-text">《凤鸣长安》服化道确实用心，女官朝服那套细节很多。</p><div class="comment-meta">11月4日 15:40</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">杨</span><span class="comment-name">杨超越</span></div><p class="comment-text">在等《雾港》的正式上线，预告片氛围拉满了。</p><div class="comment-meta">11月4日 10:10</div></div>
+          <div class="comment-card"><div class="comment-user"><span class="avatar">朱</span><span class="comment-name">朱砂痣</span></div><p class="comment-text">《像素恋人》导演剪辑版多了一段结尾，比原版完整。</p><div class="comment-meta">11月3日 21:55</div></div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section id="news">
+        <h2 class="section-title">相关资讯</h2>
+        <ul class="news-list">
+          <li>
+            <div class="news-thumb"><img src="https://picsum.photos/seed/wugang-yugao01/600/400" alt="悬疑剧雾港预告海报" width="600" height="400" loading="lazy"></div>
+            <div class="news-body">
+              <div class="news-title">悬疑剧《雾港》发布首支预告，定档 11 月下旬</div>
+              <div class="news-date">2026-11-05</div>
+              <div class="news-summary">该剧以海港小城连环失踪案为背景，预告片展示了双时间线叙事结构，主创团队此前曾参与《暗涌追凶》制作。</div>
+            </div>
+          </li>
+          <li>
+            <div class="news-thumb"><img src="https://picsum.photos/seed/weiduanju-qushi02/600/400" alt="竖屏微短剧趋势配图" width="600" height="400" loading="lazy"></div>
+            <div class="news-body">
+              <div class="news-title">竖屏微短剧单集时长继续压缩，3 分钟成为主流</div>
+              <div class="news-date">2026-11-03</div>
+              <div class="news-summary">近期上线的《外卖员的午夜订单》《时间典当行》均采用 3 分钟以内的单集时长，平台方表示完播率与短时长正相关。</div>
+            </div>
+          </li>
+          <li>
+            <div class="news-thumb"><img src="https://picsum.photos/seed/anyong-danmu03/600/400" alt="暗涌追凶弹幕互动配图" width="600" height="400" loading="lazy"></div>
+            <div class="news-body">
+              <div class="news-title">《暗涌追凶》第 7 集弹幕互动量突破 10 万条</div>
+              <div class="news-date">2026-11-03</div>
+              <div class="news-summary">该集关键线索揭晓引发集中讨论，观众在弹幕中自发梳理时间线，形成观剧辅助内容。</div>
+            </div>
+          </li>
+          <li>
+            <div class="news-thumb"><img src="https://picsum.photos/seed/xiangsu-jiandao04/600/400" alt="像素恋人导演剪辑版配图" width="600" height="400" loading="lazy"></div>
+            <div class="news-body">
+              <div class="news-title">《像素恋人》导演剪辑版新增 6 分钟结局内容</div>
+              <div class="news-date">2026-11-07</div>
+              <div class="news-summary">导演在社区说明中表示新增片段补全了男女主角在现实世界的相遇，回应了观众对原版结局的讨论。</div>
+            </div>
+          </li>
+          <li>
+            <div class="news-thumb"><img src="https://picsum.photos/seed/shijian-diandang05/600/400" alt="时间典当行微短剧配图" width="600" height="400" loading="lazy"></div>
+            <div class="news-body">
+              <div class="news-title">微短剧《时间典当行》前 5 集上线，以时间交易为核心设定</div>
+              <div class="news-date">2026-11-04</div>
+              <div class="news-summary">故事围绕一家可以典当时间的神秘店铺展开，每集一个独立委托，主线逐渐揭示店主身份。</div>
+            </div>
+          </li>
+          <li>
+            <div class="news-thumb"><img src="https://picsum.photos/seed/tiegui-muhou06/600/400" alt="铁轨旁的夏天幕后特辑配图" width="600" height="400" loading="lazy"></div>
+            <div class="news-body">
+              <div class="news-title">《铁轨旁的夏天》幕后特辑上线，聚焦车站实景搭建</div>
+              <div class="news-date">2026-11-06</div>
+              <div class="news-summary">特辑展示了剧组为还原九十年代铁路车站搭建的实景细节，包括站台牌、候车室和绿皮车厢内饰。</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section id="related">
+        <h2 class="section-title">延伸方向推荐</h2>
+        <div class="tag-index">
+          <a href="/#featured">社会派推理剧集</a>
+          <a href="/#featured">单元式微短剧</a>
+          <a href="/#featured">单场景科幻短片</a>
+          <a href="/#featured">职场情感双线剧</a>
+          <a href="/#featured">女性向权谋群像</a>
+          <a href="/#featured">怀旧年代成长剧</a>
+          <a href="/#featured">高概念竖屏悬疑</a>
+        </div>
+      </section>
+
+      <!-- 11. 补充板块：可信度分层 -->
+      <section id="trust">
+        <h2 class="section-title">条目参考维度</h2>
+        <div class="trust-tiers">
+          <div class="tier-card">
+            <h4>叙事完整度 <span class="tier-badge tier-a">高</span></h4>
+            <p>《春不晚》《铁轨旁的夏天》等已完结剧集，故事线收束完整，适合偏好完整叙事的观众。</p>
+          </div>
+          <div class="tier-card">
+            <h4>更新稳定性 <span class="tier-badge tier-a">高</span></h4>
+            <p>《暗涌追凶》《凤鸣长安》保持固定周更节奏，追更预期明确，适合习惯定期观看的观众。</p>
+          </div>
+          <div class="tier-card">
+            <h4>概念实验性 <span class="tier-badge tier-b">中高</span></h4>
+            <p>《最后一班地铁》《像素恋人》在形式和设定上更具探索性，适合想看不一样叙事的观众。</p>
+          </div>
+          <div class="tier-card">
+            <h4>观看门槛 <span class="tier-badge tier-c">中</span></h4>
+            <p>古装权谋和复杂悬疑需要一定注意力投入；轻喜剧和都市情感门槛较低，可随时进入。</p>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.main-content -->
+
+    <!-- 右侧辅助栏 -->
+    <aside class="aux-sidebar" aria-label="辅助信息">
+      <div class="aux-card">
+        <h3>今日热度榜</h3>
+        <ul class="rank-list">
+          <li><span class="rank-num">1</span><span class="rank-title">暗涌追凶</span><span class="rank-badge">9.2</span></li>
+          <li><span class="rank-num">2</span><span class="rank-title">春不晚</span><span class="rank-badge">8.7</span></li>
+          <li><span class="rank-num">3</span><span class="rank-title">凤鸣长安</span><span class="rank-badge">8.9</span></li>
+          <li><span class="rank-num">4</span><span class="rank-title">最后一班地铁</span><span class="rank-badge">8.8</span></li>
+          <li><span class="rank-num">5</span><span class="rank-title">外卖员的午夜订单</span><span class="rank-badge">8.5</span></li>
+          <li><span class="rank-num">6</span><span class="rank-title">像素恋人</span><span class="rank-badge">8.4</span></li>
+          <li><span class="rank-num">7</span><span class="rank-title">合租室友是AI</span><span class="rank-badge">8.1</span></li>
+        </ul>
+      </div>
+      <div class="aux-card">
+        <h3>今日更新摘要</h3>
+        <ul class="update-list" style="font-size:0.8rem;">
+          <li><span class="update-time">09:30</span><span class="update-title">暗涌追凶 第8集</span></li>
+          <li><span class="update-time">10:15</span><span class="update-title">凤鸣长安 第22集</span></li>
+          <li><span class="update-time">11:00</span><span class="update-title">外卖员的午夜订单 全20集</span></li>
+          <li><span class="update-time">12:40</span><span class="update-title">合租室友是AI 第14集</span></li>
+        </ul>
+      </div>
+      <div class="aux-card">
+        <h3>类型快速入口</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <a href="/#featured" class="tag" style="text-decoration:none;">悬疑推理</a>
+          <a href="/#featured" class="tag" style="text-decoration:none;">都市情感</a>
+          <a href="/#featured" class="tag" style="text-decoration:none;">古装权谋</a>
+          <a href="/#featured" class="tag" style="text-decoration:none;">竖屏微短剧</a>
+          <a href="/#featured" class="tag" style="text-decoration:none;">创作者短片</a>
+          <a href="/#featured" class="tag" style="text-decoration:none;">科幻脑洞</a>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /.portal-layout -->
+</main>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/#hero" class="logo" style="font-size:1.1rem;">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;">
+            <rect x="2" y="2" width="36" height="36" rx="10" fill="#6d28d9"/>
+            <path d="M14 12 L14 28 L28 20 Z" fill="#fbbf24"/>
+            <circle cx="30" cy="10" r="4" fill="#a78bfa"/>
+          </svg>
+          <span class="logo-text">国产茄子视频</span>
+        </a>
+        <p>关注国产剧集、竖屏微短剧与创作者短片的内容聚合，提供类型分类、更新追踪和观看顺序参考。</p>
+      </div>
+      <div class="footer-col">
+        <h4>内容类型</h4>
+        <ul>
+          <li><a href="/#featured">悬疑推理</a></li>
+          <li><a href="/#featured">都市情感</a></li>
+          <li><a href="/#featured">古装权谋</a></li>
+          <li><a href="/#featured">竖屏微短剧</a></li>
+          <li><a href="/#featured">创作者短片</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#updates">最新更新</a></li>
+          <li><a href="/#deep-dive">深度解析</a></li>
+          <li><a href="/#guide">观看指南</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>更多</h4>
+        <ul>
+          <li><a href="/#comments">用户评论</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#related">延伸方向</a></li>
+          <li><a href="/#trust">参考维度</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 国产茄子视频 · 内容聚合展示</span>
+      <span>部分内容为示例数据，仅用于展示页面结构</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 轻量交互：点击 FAQ 摘要以外的区域也能展开/收起（保持 details 原生行为）
+  // 无额外依赖，关闭 JS 后正文仍可阅读。
+  document.addEventListener('DOMContentLoaded', function () {
+    // 为所有页内锚点添加平滑滚动偏移已由 CSS scroll-padding 处理
+    // 搜索按钮聚焦到首屏或导航，此处仅保留键盘可达性
+  });
+</script>
+</body>
+                  </html>
