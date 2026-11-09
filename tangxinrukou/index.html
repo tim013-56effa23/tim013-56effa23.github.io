@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>糖心入口 - 甜点烘焙内容聚合</title>
+<meta name="description" content="糖心入口聚合甜点烘焙配方、糖心蛋糕做法、流心甜品教程与探店榜单，收录流心挞、熔岩蛋糕、焦糖布丁等具体条目，适合家庭烘焙与甜品爱好者查阅。">
+<meta name="keywords" content="流心蛋糕,熔岩巧克力,焦糖布丁,甜点烘焙,流心甜品">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23c2410c'/%3E%3Cpath d='M32 16c8 0 14 6 14 14s-6 18-14 18-14-10-14-18 6-14 14-14z' fill='%23fff7ed'/%3E%3Ccircle cx='32' cy='34' r='7' fill='%23f59e0b'/%3E%3C/svg%3E">
+<style>
+:root{
+  --brand:#c2410c;
+  --brand-deep:#9a3412;
+  --brand-soft:#fff1e6;
+  --accent:#f59e0b;
+  --accent-soft:#fef3c7;
+  --ink:#2a211c;
+  --ink-2:#5c4f47;
+  --ink-3:#8b7d73;
+  --line:#eaddd2;
+  --bg:#fdf8f3;
+  --panel:#ffffff;
+  --panel-2:#fbeade;
+  --radius:14px;
+  --radius-sm:8px;
+  --shadow:0 2px 10px rgba(122,72,40,.07);
+  --shadow-lg:0 10px 30px rgba(122,72,40,.12);
+  --head-h:116px;
+  --container:1320px;
+  --gap:22px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--head-h) + 12px);}
+body{
+  margin:0;
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700;}
+ul,ol{margin:0;padding:0;list-style:none;}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px;}
+
+/* ---------- 吸顶公告条 + 页头 ---------- */
+.sticky-top{position:sticky;top:0;z-index:60;}
+.notice-bar{
+  background:linear-gradient(90deg,var(--brand-deep),var(--brand) 55%,#d9662a);
+  color:#fff7ed;font-size:13px;
+}
+.notice-bar .inner{
+  max-width:var(--container);margin:0 auto;padding:7px 20px;
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+}
+.notice-bar .tag{
+  background:#fff7ed;color:var(--brand-deep);font-weight:700;
+  padding:1px 9px;border-radius:20px;font-size:12px;letter-spacing:.5px;white-space:nowrap;
+}
+.notice-bar .items{display:flex;gap:18px;flex-wrap:wrap;overflow:hidden;}
+.notice-bar .items span{white-space:nowrap;opacity:.95;}
+.notice-bar .items span::before{content:"·";margin-right:8px;opacity:.6;}
+
+.site-header{
+  background:rgba(253,248,243,.96);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.header-inner{
+  max-width:var(--container);margin:0 auto;padding:12px 20px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0;}
+.brand-mark{width:44px;height:44px;flex-shrink:0;}
+.brand-text{display:flex;flex-direction:column;line-height:1.2;}
+.brand-name{font-size:21px;font-weight:800;letter-spacing:1px;color:var(--brand-deep);}
+.brand-sub{font-size:11px;color:var(--ink-3);letter-spacing:2px;}
+
+.main-nav{display:flex;gap:4px;flex-wrap:wrap;flex:1;min-width:0;}
+.main-nav a{
+  padding:6px 11px;border-radius:20px;font-size:14px;color:var(--ink-2);
+  white-space:nowrap;transition:.18s;
+}
+.main-nav a:hover,.main-nav a.active{background:var(--brand-soft);color:var(--brand-deep);font-weight:600;}
+
+.search-wrap{position:relative;flex-shrink:0;}
+.search-wrap input{
+  width:200px;padding:8px 34px 8px 13px;border-radius:20px;
+  border:1px solid var(--line);background:#fff;font-size:13px;color:var(--ink);
+}
+.search-wrap input::placeholder{color:var(--ink-3);}
+.search-wrap .icon{
+  position:absolute;right:11px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;color:var(--ink-3);pointer-events:none;
+}
+.search-hint{
+  position:absolute;top:calc(100% + 8px);left:0;right:0;
+  background:#fff;border:1px solid var(--line);border-radius:10px;
+  box-shadow:var(--shadow-lg);font-size:12.5px;color:var(--ink-3);
+  padding:9px 13px;display:none;z-index:5;
+}
+.search-hint.show{display:block;}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(245,158,11,.22), transparent 42%),
+    radial-gradient(circle at 12% 88%, rgba(194,65,12,.16), transparent 46%),
+    linear-gradient(160deg,#fff7ef,#fbeade 62%,#f7dcc4);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:var(--container);margin:0 auto;padding:44px 20px 52px;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;
+}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#fff;border:1px solid #f3d5bd;color:var(--brand-deep);
+  font-size:12.5px;font-weight:600;padding:4px 13px;border-radius:20px;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.hero-kicker i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;}
+.hero h1{
+  font-size:clamp(34px,4.4vw,52px);letter-spacing:2px;color:var(--brand-deep);
+  margin-bottom:14px;font-weight:800;
+}
+.hero-lead{
+  font-size:16px;color:var(--ink-2);max-width:560px;line-height:1.85;margin-bottom:22px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 22px;border-radius:26px;font-size:14.5px;font-weight:600;
+  border:1px solid transparent;transition:.2s;
+}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 6px 16px rgba(194,65,12,.28);}
+.btn-primary:hover{background:var(--brand-deep);transform:translateY(-1px);}
+.btn-ghost{background:#fff;color:var(--brand-deep);border-color:#f0cdb2;}
+.btn-ghost:hover{background:var(--brand-soft);}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;}
+.hero-stats div{display:flex;flex-direction:column;}
+.hero-stats b{font-size:22px;color:var(--brand-deep);font-weight:800;line-height:1.2;}
+.hero-stats span{font-size:12.5px;color:var(--ink-3);}
+
+.hero-art{position:relative;display:flex;justify-content:center;}
+.hero-art svg{width:100%;max-width:420px;height:auto;filter:drop-shadow(0 16px 26px rgba(154,52,18,.16));}
+
+/* ---------- 布局：三栏门户 ---------- */
+.layout{
+  max-width:var(--container);margin:0 auto;padding:32px 20px 60px;
+  display:grid;grid-template-columns:186px minmax(0,1fr) 258px;gap:var(--gap);
+  align-items:start;
+}
+
+/* 频道索引 */
+.channel-col{position:sticky;top:calc(var(--head-h) + 16px);}
+.channel-box{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.channel-box h2{
+  font-size:13px;letter-spacing:2px;color:var(--ink-3);font-weight:600;
+  padding:13px 16px 9px;border-bottom:1px dashed var(--line);
+}
+.channel-box nav{display:flex;flex-direction:column;padding:8px 8px 10px;}
+.channel-box nav a{
+  padding:8px 11px;border-radius:var(--radius-sm);font-size:14px;color:var(--ink-2);
+  display:flex;justify-content:space-between;align-items:center;transition:.16s;
+}
+.channel-box nav a:hover{background:var(--brand-soft);color:var(--brand-deep);font-weight:600;}
+.channel-box nav a small{font-size:11px;color:var(--ink-3);}
+.channel-note{
+  margin-top:16px;background:var(--panel-2);border:1px solid #f4d8c1;
+  border-radius:var(--radius);padding:14px 15px;font-size:12.5px;color:var(--ink-2);line-height:1.7;
+}
+.channel-note b{display:block;color:var(--brand-deep);font-size:13px;margin-bottom:5px;}
+
+/* 主栏与侧栏 */
+.main-col{min-width:0;}
+.aside-col{display:flex;flex-direction:column;gap:var(--gap);position:sticky;top:calc(var(--head-h) + 16px);}
+
+/* 通用板块 */
+.panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 22px 24px;margin-bottom:var(--gap);
+}
+.panel:last-child{margin-bottom:0;}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
+.sec-head h2{
+  font-size:20px;color:var(--ink);letter-spacing:.5px;position:relative;padding-left:13px;
+}
+.sec-head h2::before{
+  content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;
+  border-radius:3px;background:linear-gradient(var(--brand),var(--accent));
+}
+.sec-head .sec-tip{font-size:12.5px;color:var(--ink-3);}
+.sec-more{font-size:13px;color:var(--brand);font-weight:600;white-space:nowrap;}
+.sec-more:hover{text-decoration:underline;}
+
+/* 概览 */
+.overview p{color:var(--ink-2);font-size:14.5px;margin:0 0 12px;}
+.overview p:last-child{margin-bottom:0;}
+.overview .hl{color:var(--brand-deep);font-weight:600;}
+
+/* 精选卡片 */
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  background:#fff;display:flex;flex-direction:column;transition:.2s;
+}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:#ecc9ae;}
+.card-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--panel-2);}
+.card-img img{width:100%;height:100%;object-fit:cover;}
+.card-badge{
+  position:absolute;left:9px;top:9px;background:rgba(154,52,18,.92);color:#fff;
+  font-size:11px;padding:2px 9px;border-radius:20px;letter-spacing:.5px;
+}
+.card-body{padding:12px 13px 14px;display:flex;flex-direction:column;flex:1;}
+.card-body h3{font-size:15px;margin-bottom:7px;color:var(--ink);}
+.card-body h3 a:hover{color:var(--brand);}
+.card-desc{font-size:12.8px;color:var(--ink-2);line-height:1.65;flex:1;margin:0 0 10px;}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;}
+.tag{
+  font-size:11px;padding:1px 8px;border-radius:4px;
+  background:var(--brand-soft);color:var(--brand-deep);
+}
+.tag.alt{background:var(--accent-soft);color:#92400e;}
+.card-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11.5px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:8px;
+}
+.card-meta .hot{color:#d9480f;font-weight:600;}
+
+/* 最新更新列表 */
+.update-list{display:flex;flex-direction:column;}
+.update-item{
+  display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);align-items:flex-start;
+}
+.update-item:last-child{border-bottom:none;padding-bottom:0;}
+.update-time{
+  font-size:11.5px;color:var(--brand);background:var(--brand-soft);
+  border-radius:5px;padding:2px 8px;white-space:nowrap;flex-shrink:0;margin-top:2px;font-variant-numeric:tabular-nums;
+}
+.update-item strong{font-size:14px;color:var(--ink);font-weight:600;}
+.update-item p{margin:2px 0 0;font-size:12.8px;color:var(--ink-2);line-height:1.6;}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;}
+.cat-item{
+  border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 12px 11px;
+  background:linear-gradient(150deg,#fff,var(--brand-soft));transition:.18s;display:block;
+}
+.cat-item:hover{border-color:#e9bf9d;transform:translateY(-2px);box-shadow:var(--shadow);}
+.cat-item b{display:block;font-size:14px;color:var(--brand-deep);margin-bottom:3px;}
+.cat-item span{font-size:11.5px;color:var(--ink-3);line-height:1.5;display:block;}
+
+/* 深度解析 */
+.deep h3{
+  font-size:16px;color:var(--brand-deep);margin:20px 0 9px;
+  padding-left:11px;border-left:3px solid var(--accent);
+}
+.deep h3:first-of-type{margin-top:6px;}
+.deep p{font-size:14.5px;color:var(--ink-2);margin:0 0 11px;text-align:justify;}
+.deep ul{margin:0 0 13px;padding-left:2px;}
+.deep ul li{
+  font-size:14px;color:var(--ink-2);padding:4px 0 4px 17px;position:relative;line-height:1.7;
+}
+.deep ul li::before{
+  content:"";position:absolute;left:2px;top:13px;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+}
+.deep .cmp{
+  background:var(--panel-2);border:1px solid #f2d6bf;border-radius:var(--radius-sm);
+  padding:13px 15px;margin:0 0 14px;font-size:13.5px;color:var(--ink-2);
+}
+.deep .cmp b{color:var(--brand-deep);}
+
+/* 体验指南步骤 */
+.steps{display:flex;flex-direction:column;gap:0;counter-reset:step;}
+.step{
+  display:grid;grid-template-columns:40px 1fr;gap:14px;padding:13px 0;border-bottom:1px dashed var(--line);
+}
+.step:last-child{border-bottom:none;padding-bottom:0;}
+.step-no{
+  counter-increment:step;width:36px;height:36px;border-radius:50%;
+  background:var(--brand-soft);color:var(--brand-deep);font-weight:800;font-size:15px;
+  display:flex;align-items:center;justify-content:center;border:1px solid #f0cdb2;
+}
+.step-no::before{content:counter(step);}
+.step h3{font-size:14.5px;margin-bottom:4px;color:var(--ink);}
+.step p{margin:0;font-size:13.2px;color:var(--ink-2);line-height:1.68;}
+
+/* FAQ */
+.faq details{
+  border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:9px;
+  background:#fff;overflow:hidden;
+}
+.faq details:last-child{margin-bottom:0;}
+.faq summary{
+  padding:12px 15px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;
+  list-style:none;position:relative;padding-right:38px;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"+";position:absolute;right:15px;top:50%;transform:translateY(-50%);
+  font-size:18px;color:var(--brand);font-weight:400;line-height:1;
+}
+.faq details[open] summary::after{content:"–";}
+.faq details[open] summary{background:var(--brand-soft);color:var(--brand-deep);}
+.faq .ans{padding:11px 15px 14px;font-size:13.5px;color:var(--ink-2);line-height:1.75;border-top:1px dashed var(--line);}
+
+/* 评论 */
+.comment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.comment{
+  border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;background:#fff;
+}
+.comment .who{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.avatar{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;
+}
+.comment .who b{font-size:13px;color:var(--ink);}
+.comment .who time{font-size:11px;color:var(--ink-3);margin-left:auto;}
+.comment p{margin:0;font-size:12.9px;color:var(--ink-2);line-height:1.65;}
+.star{color:var(--accent);font-size:11.5px;letter-spacing:1px;}
+
+/* 资讯 */
+.news-list{display:flex;flex-direction:column;gap:0;}
+.news-item{
+  display:grid;grid-template-columns:104px 1fr;gap:13px;padding:13px 0;border-bottom:1px dashed var(--line);
+}
+.news-item:last-child{border-bottom:none;padding-bottom:0;}
+.news-item:first-child{padding-top:0;}
+.news-thumb{aspect-ratio:4/3;border-radius:var(--radius-sm);overflow:hidden;background:var(--panel-2);}
+.news-thumb img{width:100%;height:100%;object-fit:cover;}
+.news-item h3{font-size:14.5px;margin-bottom:4px;}
+.news-item h3 a:hover{color:var(--brand);}
+.news-item .date{font-size:11.5px;color:var(--brand);margin-bottom:3px;display:block;}
+.news-item p{margin:0;font-size:12.8px;color:var(--ink-2);line-height:1.62;}
+
+/* 相关推荐 */
+.rel-tags{display:flex;flex-wrap:wrap;gap:9px;}
+.rel-tags a{
+  font-size:13px;padding:6px 14px;border-radius:20px;
+  border:1px solid var(--line);background:#fff;color:var(--ink-2);transition:.16s;
+}
+.rel-tags a:hover{border-color:var(--brand);color:var(--brand-deep);background:var(--brand-soft);}
+
+/* 榜单 */
+.rank-list{counter-reset:rank;display:flex;flex-direction:column;}
+.rank-item{
+  display:grid;grid-template-columns:26px 1fr auto;gap:11px;align-items:center;
+  padding:10px 0;border-bottom:1px dashed var(--line);counter-increment:rank;
+}
+.rank-item:last-child{border-bottom:none;padding-bottom:0;}
+.rank-no{
+  width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;background:var(--panel-2);color:var(--brand-deep);
+}
+.rank-no::before{content:counter(rank);}
+.rank-item:nth-child(1) .rank-no{background:var(--brand);color:#fff;}
+.rank-item:nth-child(2) .rank-no{background:#e8763a;color:#fff;}
+.rank-item:nth-child(3) .rank-no{background:#f0a868;color:#fff;}
+.rank-item .name{font-size:13.5px;color:var(--ink);font-weight:600;}
+.rank-item .type{font-size:11px;color:var(--ink-3);}
+.rank-item .score{font-size:12.5px;color:#d9480f;font-weight:700;}
+
+/* 侧栏卡片 */
+.side-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 16px 18px;
+}
+.side-card h2{
+  font-size:15px;color:var(--ink);margin-bottom:12px;padding-bottom:9px;
+  border-bottom:1px dashed var(--line);display:flex;align-items:center;gap:7px;
+}
+.side-card h2::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--brand);}
+.side-card .mini-list{display:flex;flex-direction:column;gap:9px;}
+.side-card .mini-list a{font-size:13px;color:var(--ink-2);display:flex;gap:8px;line-height:1.5;}
+.side-card .mini-list a:hover{color:var(--brand);}
+.side-card .mini-list .dot{color:var(--accent);flex-shrink:0;font-weight:700;}
+.side-card .mini-list small{color:var(--ink-3);font-size:11.5px;}
+
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:16px;}
+.timeline::before{content:"";position:absolute;left:3px;top:5px;bottom:5px;width:2px;background:var(--line);}
+.tl-item{position:relative;padding:0 0 13px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:"";position:absolute;left:-16px;top:6px;width:8px;height:8px;border-radius:50%;
+  background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px var(--accent);
+}
+.tl-item b{display:block;font-size:12.5px;color:var(--brand-deep);}
+.tl-item span{font-size:12px;color:var(--ink-2);line-height:1.55;}
+
+.quote-card{
+  background:linear-gradient(155deg,var(--panel-2),#fff);
+  border:1px solid #f2d6bf;border-radius:var(--radius);padding:16px;
+}
+.quote-card blockquote{margin:0 0 9px;font-size:13.5px;color:var(--ink-2);line-height:1.75;}
+.quote-card .from{font-size:12px;color:var(--brand-deep);font-weight:600;}
+
+/* 页尾 */
+.site-footer{
+  background:#3b2a20;color:#e8d8cb;margin-top:10px;
+}
+.footer-inner{
+  max-width:var(--container);margin:0 auto;padding:38px 20px 22px;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;
+}
+.footer-brand .brand-name{color:#fff;font-size:19px;}
+.footer-brand p{font-size:12.8px;color:#c2ae9f;line-height:1.75;margin:9px 0 0;}
+.footer-col h3{font-size:13.5px;color:#fff;margin-bottom:11px;letter-spacing:.5px;}
+.footer-col a{display:block;font-size:12.8px;color:#c2ae9f;padding:3px 0;}
+.footer-col a:hover{color:var(--accent);}
+.footer-bottom{
+  border-top:1px solid #55402f;max-width:var(--container);margin:0 auto;
+  padding:13px 20px 20px;font-size:11.5px;color:#a08e80;display:flex;
+  justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1180px){
+  .layout{grid-template-columns:170px minmax(0,1fr);}
+  .aside-col{grid-column:1 / -1;position:static;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .cat-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+}
+@media (max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:26px;}
+  .hero-art{order:-1;max-width:320px;margin:0 auto;}
+  .layout{grid-template-columns:1fr;gap:18px;}
+  .channel-col{position:static;}
+  .channel-box nav{flex-direction:row;flex-wrap:wrap;gap:4px;}
+  .channel-box nav a{flex:0 0 auto;border:1px solid var(--line);}
+  .channel-box nav a small{display:none;}
+  .aside-col{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:740px){
+  :root{--head-h:150px;--gap:16px;}
+  .header-inner{padding:10px 14px;gap:10px;}
+  .main-nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;}
+  .main-nav a{font-size:13px;padding:5px 10px;}
+  .search-wrap{margin-left:auto;}
+  .search-wrap input{width:150px;}
+  .hero-inner{padding:30px 16px 36px;}
+  .hero h1{font-size:36px;}
+  .hero-lead{font-size:14.5px;}
+  .layout{padding:20px 14px 40px;}
+  .panel{padding:16px 15px 18px;}
+  .card-grid{grid-template-columns:1fr;}
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .comment-list{grid-template-columns:1fr;}
+  .aside-col{grid-template-columns:1fr;}
+  .news-item{grid-template-columns:84px 1fr;gap:11px;}
+  .footer-inner{grid-template-columns:1fr;padding:28px 16px 16px;gap:20px;}
+  .footer-bottom{padding:12px 16px 18px;}
+  .hero-stats{gap:18px;}
+  .update-item{flex-direction:column;gap:4px;}
+  .update-time{align-self:flex-start;}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 + 页头 -->
+<div class="sticky-top">
+  <div class="notice-bar">
+    <div class="inner">
+      <span class="tag">今日更新</span>
+      <div class="items">
+        <span>11 月新增 18 款流心甜点配方</span>
+        <span>熔岩巧克力蛋糕 第 4 版配方上线</span>
+        <span>焦糖布丁控温表 11-06 修订</span>
+      </div>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/#top" aria-label="糖心入口 首页">
+        <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="糖心入口标志">
+          <circle cx="32" cy="32" r="30" fill="#c2410c"/>
+          <path d="M32 15c9 0 15 6.5 15 15s-6.5 19-15 19-15-10.5-15-19 6-15 15-15z" fill="#fff7ed"/>
+          <circle cx="32" cy="33" r="7.5" fill="#f59e0b"/>
+          <path d="M25 33c2 3 5 4.5 7 4.5s5-1.5 7-4.5" stroke="#c2410c" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">糖心入口</span>
+          <span class="brand-sub">SWEET CORE</span>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="主题导航">
+        <a href="/#overview" class="active">领域概览</a>
+        <a href="/#featured">精选配方</a>
+        <a href="/#updates">最新更新</a>
+        <a href="/#categories">分类入口</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#rank">热门榜单</a>
+      </nav>
+      <div class="search-wrap">
+        <input id="siteSearch" type="search" placeholder="搜配方 / 甜点名" aria-label="搜索页面内容">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-linecap="round"/>
+        </svg>
+        <div class="search-hint" id="searchHint"></div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<!-- 主题首屏 -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="hero-kicker"><i></i>流心甜点 · 配方与探店聚合</span>
+      <h1>糖心入口</h1>
+      <p class="hero-lead">
+        汇聚流心蛋糕、熔岩巧克力、焦糖布丁、流心挞等具体甜点的配方拆解、控温要点、原料替换与门店实拍，收录家庭烘焙可直接照做的步骤与失败复盘。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/#featured">查看精选配方</a>
+        <a class="btn btn-ghost" href="/#guide">新手从哪看起</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>326</b><span>收录配方</span></div>
+        <div><b>48</b><span>流心品类</span></div>
+        <div><b>11-08</b><span>最近更新</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 420 360" role="img" aria-label="流心蛋糕剖面插画">
+        <defs>
+          <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fff7ef"/><stop offset="1" stop-color="#f2d3b6"/>
+          </linearGradient>
+          <linearGradient id="cakeTop" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7a3b1e"/><stop offset="1" stop-color="#5b2a13"/>
+          </linearGradient>
+          <linearGradient id="core" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="210" cy="312" rx="176" ry="20" fill="#e9cdb4" opacity=".55"/>
+        <ellipse cx="210" cy="300" rx="150" ry="26" fill="url(#plate)"/>
+        <ellipse cx="210" cy="296" rx="120" ry="19" fill="#fff" opacity=".7"/>
+        <path d="M120 190h180l-16 100a16 16 0 0 1-16 14H152a16 16 0 0 1-16-14z" fill="url(#cakeTop)"/>
+        <ellipse cx="210" cy="190" rx="90" ry="24" fill="#8a4626"/>
+        <ellipse cx="210" cy="188" rx="74" ry="18" fill="url(#core)"/>
+        <ellipse cx="210" cy="186" rx="52" ry="12" fill="#fde68a"/>
+        <path d="M168 226c18 16 66 16 84 0-10 26-24 40-42 40s-32-14-42-40z" fill="url(#core)" opacity=".95"/>
+        <path d="M190 240c8 22 32 22 40 0" stroke="#b45309" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+        <circle cx="150" cy="150" r="7" fill="#f59e0b"/>
+        <circle cx="272" cy="134" r="5" fill="#c2410c" opacity=".7"/>
+        <circle cx="290" cy="176" r="4" fill="#f59e0b" opacity=".8"/>
+        <path d="M84 128c14-10 30-10 44 0" stroke="#c2410c" stroke-width="3" fill="none" stroke-linecap="round" opacity=".4"/>
+        <path d="M300 96c12 8 24 8 36 0" stroke="#c2410c" stroke-width="3" fill="none" stroke-linecap="round" opacity=".35"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 主内容区：三栏门户 -->
+<div class="layout">
+
+  <!-- 左频道索引 -->
+  <aside class="channel-col">
+    <div class="channel-box">
+      <h2>频道索引</h2>
+      <nav aria-label="频道索引">
+        <a href="/#featured">流心蛋糕 <small>86</small></a>
+        <a href="/#featured">熔岩巧克力 <small>54</small></a>
+        <a href="/#featured">焦糖布丁 <small>41</small></a>
+        <a href="/#featured">流心挞 <small>38</small></a>
+        <a href="/#featured">巴斯克 <small>33</small></a>
+        <a href="/#featured">舒芙蕾 <small>29</small></a>
+        <a href="/#featured">提拉米苏 <small>25</small></a>
+        <a href="/#guide">控温工具 <small>20</small></a>
+        <a href="/#news">探店实拍 <small>—</small></a>
+        <a href="/#rank">榜单 <small>—</small></a>
+      </nav>
+    </div>
+    <div class="channel-note">
+      <b>本周新增</b>
+      熔岩巧克力蛋糕 4 版配方、焦糖布丁控温表修订、流心挞 3 家门店实拍更新。
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="main-col" id="main">
+
+    <!-- 1 领域概览 -->
+    <section class="panel overview" id="overview">
+      <div class="sec-head">
+        <h2>糖心入口领域概览</h2>
+        <span class="sec-tip">2026-11-08 更新</span>
+      </div>
+      <p>糖心入口覆盖的核心是“切开有流心”的一类甜点。它不是一个单一条目，而是由多个具体品类构成：以鸡蛋、黄油、巧克力为基底的<span class="hl">熔岩巧克力蛋糕</span>，靠高比例黄油与短时烘烤形成中心未凝固层；以卡仕达或蛋黄奶浆为芯的<span class="hl">流心挞</span>，靠冷藏定型再回温；还有以淡奶油、马斯卡彭做夹层的<span class="hl">流心巴斯克</span>，中心半熟是它的判断标准。三类甜点的关键变量并不相同，控温、含水率、出炉时机的侧重各有差异。</p>
+      <p>从消费与制作角度看，这个领域目前值得关注的方向集中在三处。一是<span class="hl">低糖流心配方</span>，用赤藓糖醇或椰子花糖替换部分白砂糖后，流心层的凝固点会下移，需要同步调整烘烤时间；二是<span class="hl">冷冻流心</span>做法，把芯料提前冻成小球再包入面糊，适合家庭烤箱温度不稳的情况；三是<span class="hl">门店实拍对比</span>，同一款熔岩蛋糕在不同烘焙店的中心流速差异明显，切开后 10 秒内的流动状态是最直接的比较依据。</p>
+      <p>对刚接触这一类甜点的人来说，需要先分清“流心”和“夹心”的区别：前者依靠中心未完全熟化形成液态，后者是熟制后注入的馅料。判断标准、失败原因和补救方式完全不同，这也是后续配方与问答会反复落到具体条目上的原因。</p>
+    </section>
+
+    <!-- 2 精选内容推荐 -->
+    <section class="panel" id="featured">
+      <div class="sec-head">
+        <h2>精选流心甜点配方</h2>
+        <a class="sec-more" href="/#categories">按分类筛选 →</a>
+      </div>
+      <div class="card-grid">
+
+        <article class="card">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/rongyan-choco01/400/300" width="400" height="300" loading="lazy" alt="熔岩巧克力蛋糕切开流心特写">
+            <span class="card-badge">熔岩巧克力</span>
+          </div>
+          <div class="card-body">
+            <h3><a href="/#deep">熔岩巧克力蛋糕 4 版配方</a></h3>
+            <p class="card-desc">第 4 版把黄油比例降到 62%，中心流速更稳；附 200℃ 与 220℃ 两套烘烤时间对照，适合家用小烤箱。</p>
+            <div class="tag-row"><span class="tag">控温</span><span class="tag alt">家用烤箱</span></div>
+            <div class="card-meta"><span class="hot">热度 9.6</span><span>11-07 更新</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/jiaotang-buding02/400/300" width="400" height="300" loading="lazy" alt="焦糖布丁表面焦糖层">
+            <span class="card-badge">焦糖布丁</span>
+          </div>
+          <div class="card-body">
+            <h3><a href="/#deep">焦糖布丁 110℃ 水浴法</a></h3>
+            <p class="card-desc">水浴温度控制在 110℃，蛋奶液不产生蜂窝；附脱模前冷藏时长与焦糖脆壳喷枪距离。</p>
+            <div class="tag-row"><span class="tag">水浴</span><span class="tag alt">零失败</span></div>
+            <div class="card-meta"><span class="hot">热度 9.3</span><span>11-06 更新</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/liuxin-ta03/400/300" width="400" height="300" loading="lazy" alt="流心挞切面与酥皮层次">
+            <span class="card-badge">流心挞</span>
+          </div>
+          <div class="card-body">
+            <h3><a href="/#deep">流心挞酥皮与奶浆配比</a></h3>
+            <p class="card-desc">酥皮用 3:2 面粉黄油比更酥；奶浆芯料冷藏 4 小时后回温 8 分钟再烤，避免塌芯。</p>
+            <div class="tag-row"><span class="tag">酥皮</span><span class="tag alt">冷藏回温</span></div>
+            <div class="card-meta"><span class="hot">热度 9.1</span><span>11-05 更新</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/basike04/400/300" width="400" height="300" loading="lazy" alt="流心巴斯克蛋糕表面焦化层">
+            <span class="card-badge">巴斯克</span>
+          </div>
+          <div class="card-body">
+            <h3><a href="/#deep">流心巴斯克 230℃ 短烤</a></h3>
+            <p class="card-desc">230℃ 烤 18 分钟，中心温度 62℃ 时出炉，冷藏后依然保持半流动态，适合 6 寸模具。</p>
+            <div class="tag-row"><span class="tag">半熟</span><span class="tag alt">6 寸模具</span></div>
+            <div class="card-meta"><span class="hot">热度 8.9</span><span>11-04 更新</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/shufulei05/400/300" width="400" height="300" loading="lazy" alt="舒芙蕾流心内馅">
+            <span class="card-badge">舒芙蕾</span>
+          </div>
+          <div class="card-body">
+            <h3><a href="/#deep">巧克力舒芙蕾不回缩做法</a></h3>
+            <p class="card-desc">蛋白打到湿性偏干，入炉前模具抹黄油撒糖；出炉 3 分钟内食用，内芯流心最明显。</p>
+            <div class="tag-row"><span class="tag">蛋白霜</span><span class="tag alt">即烤即食</span></div>
+            <div class="card-meta"><span class="hot">热度 8.7</span><span>11-03 更新</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/tilamisu06/400/300" width="400" height="300" loading="lazy" alt="流心提拉米苏杯装">
+            <span class="card-badge">提拉米苏</span>
+          </div>
+          <div class="card-body">
+            <h3><a href="/#deep">流心提拉米苏蛋黄糊</a></h3>
+            <p class="card-desc">蛋黄糊隔 82℃ 水打发至浓稠，中心保留半流动马斯卡彭层，冷藏 6 小时后风味最稳。</p>
+            <div class="tag-row"><span class="tag">马斯卡彭</span><span class="tag alt">隔水打发</span></div>
+            <div class="card-meta"><span class="hot">热度 8.6</span><span>11-02 更新</span></div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 3 最新更新 -->
+    <section class="panel" id="updates">
+      <div class="sec-head">
+        <h2>最新更新与动态</h2>
+        <span class="sec-tip">按时间倒序</span>
+      </div>
+      <div class="update-list">
+        <div class="update-item">
+          <span class="update-time">今天 09:30</span>
+          <div><strong>熔岩巧克力蛋糕 4 版配方</strong><p>新增 220℃ 烘烤档位，出炉时间缩短至 9 分钟，附中心温度判读图。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">今天 08:10</span>
+          <div><strong>焦糖布丁控温表</strong><p>11-06 修订版已上线，补充 110℃ 与 120℃ 水浴下的凝固时间差。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">昨天 21:10</span>
+          <div><strong>流心挞门店实拍</strong><p>新增 3 家烘焙店切面实拍，记录切开后 10 秒内中心流速。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">昨天 18:40</span>
+          <div><strong>流心巴斯克 6 寸配方</strong><p>补充中心温度 62℃ 出炉判断，附冷藏 4 小时后切面状态。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">11 月 6 日</span>
+          <div><strong>低糖流心配方对照</strong><p>赤藓糖醇替换 30% 白砂糖后，烘烤时间需延长 1 分 20 秒，已记录实测数据。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">11 月 5 日</span>
+          <div><strong>巧克力舒芙蕾做法</strong><p>蛋白霜打发状态与回缩关系整理完成，补入 3 张阶段状态图。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">11 月 4 日</span>
+          <div><strong>流心提拉米苏蛋黄糊</strong><p>隔水打发温度从 80℃ 调整为 82℃，蛋黄糊更稳定不易结块。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">11 月 3 日</span>
+          <div><strong>冷冻流心芯料做法</strong><p>芯料球直径 2.5cm、冷冻 2 小时为佳，包入面糊后无需回温直接烘烤。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">11 月 1 日</span>
+          <div><strong>流心挞酥皮配比</strong><p>面粉与黄油 3:2 版本更新，补充冷藏松弛 40 分钟的折叠次数。</p></div>
+        </div>
+        <div class="update-item">
+          <span class="update-time">10 月 30 日</span>
+          <div><strong>烘焙门店探店榜单</strong><p>本期收录 8 家流心甜点门店，按切面流速与甜度分层排列。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 分类入口 -->
+    <section class="panel" id="categories">
+      <div class="sec-head">
+        <h2>甜点分类入口</h2>
+        <span class="sec-tip">8 个垂类方向</span>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-item" href="/#featured"><b>熔岩巧克力</b><span>高黄油短烤，中心流动态</span></a>
+        <a class="cat-item" href="/#featured"><b>流心挞</b><span>酥皮 + 奶浆芯，冷藏回温</span></a>
+        <a class="cat-item" href="/#featured"><b>焦糖布丁</b><span>水浴控温，焦糖脆壳</span></a>
+        <a class="cat-item" href="/#featured"><b>流心巴斯克</b><span>高温短烤，半熟中心</span></a>
+        <a class="cat-item" href="/#featured"><b>舒芙蕾</b><span>蛋白霜支撑，出炉即食</span></a>
+        <a class="cat-item" href="/#featured"><b>流心提拉米苏</b><span>马斯卡彭夹层，隔水打发</span></a>
+        <a class="cat-item" href="/#guide"><b>控温工具</b><span>中心温度对照与换算</span></a>
+        <a class="cat-item" href="/#news"><b>探店实拍</b><span>切面流速与甜度对比</span></a>
+      </div>
+    </section>
+
+    <!-- 5 深度解析 -->
+    <section class="panel deep" id="deep">
+      <div class="sec-head">
+        <h2>流心甜点深度解析</h2>
+        <span class="sec-tip">配方差异与判断维度</span>
+      </div>
+
+      <h3>熔岩巧克力与流心挞的核心差异</h3>
+      <p>两者都被叫作“流心”，但形成机制完全不同。熔岩巧克力蛋糕依赖面糊中心未达到完全凝固温度，出炉时中心仍是液态巧克力糊；流心挞则是先做好奶浆芯料、冷藏定型，再包入酥皮短时烘烤，靠外层熟化、内层保持低温来维持流动。这决定了两者的失败原因不一样：前者常见问题是烤过头导致中心全熟，后者常见问题是芯料温度过高提前融化、从酥皮缝隙渗出。</p>
+      <div class="cmp">
+        <b>判断要点：</b>熔岩巧克力看出炉后 5 分钟内切开，中心应缓慢流出而非瞬间塌陷；流心挞看切面，奶浆应呈半凝固膏状，完全液态说明芯料比例过高或烘烤不足。
+      </div>
+
+      <h3>控温是共同的关键变量</h3>
+      <p>无论哪一类，中心温度都比表面颜色更可靠。家用烤箱普遍存在温差，同一设定温度下不同位置可能相差 15—20℃。比较稳妥的做法是备一支探针温度计，熔岩巧克力中心到 68—72℃ 出炉，流心巴斯克到 60—64℃，焦糖布丁蛋奶液不超过 85℃。没有温度计时，可以用“时间 + 模具位置”双重校准：把模具放在烤箱中下层，先按配方时间减 1 分钟试烤，切开观察再决定是否补时。</p>
+      <ul>
+        <li>熔岩巧克力：200℃ 中层 10—12 分钟，或 220℃ 9 分钟，模具越深时间越长。</li>
+        <li>流心巴斯克：230℃ 上层 18 分钟，表面焦化即可，中心温度优先。</li>
+        <li>焦糖布丁：150℃ 水浴 35—40 分钟，水浴温度维持 110℃ 左右。</li>
+        <li>流心挞：190℃ 中层 14 分钟，酥皮边缘微黄即出炉。</li>
+      </ul>
+
+      <h3>低糖与替代原料对流心的影响</h3>
+      <p>糖在流心甜点里不只是甜味来源，还影响凝固点和保水性。把白砂糖替换为赤藓糖醇时，由于后者不参与美拉德反应、吸水能力也不同，面糊整体会更稀，中心更容易在烘烤中提前定型。实测中把 30% 白砂糖换成赤藓糖醇，熔岩巧克力需要延长约 1 分 20 秒，同时减少 5% 液体量。椰子花糖吸湿性强，替换后反而要缩短烘烤时间，否则中心容易过熟。</p>
+      <p>黄油比例同样敏感。熔岩巧克力中黄油占比从 70% 降到 62%，中心流动性会明显下降，需要靠缩短烘烤时间补偿。若使用 82% 高脂黄油，配方中的液体牛奶可减少 8—10 克，避免面糊过稀导致出炉塌陷。</p>
+
+      <h3>怎么判断一款流心甜点值不值得做</h3>
+      <p>看配方时优先关注三件事：是否给出中心温度或明确的出炉判断标准；是否说明模具尺寸与材质；是否记录了失败案例和补救方式。只写“烤至中心微流”而不给温度的配方，复现成功率通常较低。门店消费时则看切面：流心层与外围熟化层的过渡是否自然，过渡带过宽说明烘烤不均，过窄则可能是注入式夹心而非真正流心。</p>
+      <ul>
+        <li>配方标注中心温度 → 可复现性高</li>
+        <li>注明模具尺寸与深度 → 时间换算有依据</li>
+        <li>有失败复盘 → 遇到问题能对照排查</li>
+        <li>只给“适量”“少许” → 新手慎用</li>
+      </ul>
+    </section>
+
+    <!-- 6 体验指南 -->
+    <section class="panel" id="guide">
+      <div class="sec-head">
+        <h2>流心甜点体验与消费路径</h2>
+        <span class="sec-tip">从入门到比较</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-no"></div>
+          <div>
+            <h3>先做焦糖布丁建立控温手感</h3>
+            <p>布丁对温度宽容度较高，水浴法失败成本低，适合先熟悉“中心温度”和“出炉判断”这两个概念，再进入熔岩巧克力。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no"></div>
+          <div>
+            <h3>再尝试熔岩巧克力，固定模具与时间</h3>
+            <p>同一配方连续做 2—3 次，只调整烘烤时间这一个变量，记录每次切开状态。找到自己烤箱的“最佳分钟数”后，再换配方才有可比性。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no"></div>
+          <div>
+            <h3>流心挞放在第三步，处理酥皮与芯料分层</h3>
+            <p>酥皮需要冷藏松弛，芯料需要提前定型，步骤更多但每步都可单独练习。先练酥皮不开裂，再调芯料流动性。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no"></div>
+          <div>
+            <h3>门店消费时用切面流速做比较</h3>
+            <p>同一价位下，切开后 10 秒内中心缓慢流出、外围熟化层均匀的更值得复购；瞬间塌成液态或完全不动，都说明配方或出品不稳定。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no"></div>
+          <div>
+            <h3>相似条目比较看三个维度</h3>
+            <p>甜度分层、流心占比、酥皮或蛋糕体的口感厚度。三者组合不同，适口人群差异很大，不必只按热度选。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 FAQ -->
+    <section class="panel faq" id="faq">
+      <div class="sec-head">
+        <h2>流心甜点常见问答</h2>
+      </div>
+      <details>
+        <summary>熔岩巧克力蛋糕中心不流心，一般是哪一步出了问题？</summary>
+        <div class="ans">多数是烘烤时间过长或模具过浅。中心温度超过 75℃ 后基本不再流动；模具越浅，中心升温越快。可先把时间减 1 分钟试烤，并确认模具深度在 5cm 以上。</div>
+      </details>
+      <details>
+        <summary>流心挞和熔岩巧克力有什么区别？</summary>
+        <div class="ans">流心挞是酥皮包裹预先定型的奶浆芯料，靠外层熟化、内层低温形成流动；熔岩巧克力是整体面糊短时烘烤，中心未完全凝固。前者步骤多但更可控，后者对时间更敏感。</div>
+      </details>
+      <details>
+        <summary>第一次做流心甜点，从哪个条目开始比较好？</summary>
+        <div class="ans">建议从焦糖布丁水浴法开始，失败成本低、判断标准明确。熟悉中心温度概念后，再做熔岩巧克力蛋糕 4 版配方，逐步固定自己烤箱的时间。</div>
+      </details>
+      <details>
+        <summary>没有探针温度计，怎么判断流心蛋糕可以出炉了？</summary>
+        <div class="ans">看边缘：模具边缘面糊已定型、中心轻晃有明显流动感即可出炉。也可用牙签插入边缘 2cm 处，拔出干净说明外围已熟，中心通常仍在流动态。</div>
+      </details>
+      <details>
+        <summary>用赤藓糖醇做低糖流心，为什么中心更容易凝固？</summary>
+        <div class="ans">赤藓糖醇不参与美拉德反应、保水性弱，面糊整体更稀，烘烤中水分蒸发更快，中心提前定型。通常需要延长 1 分钟左右并减少少量液体。</div>
+      </details>
+      <details>
+        <summary>流心巴斯克的半熟中心和“没烤熟”怎么区分？</summary>
+        <div class="ans">半熟中心温度在 60—64℃，切面呈膏状缓慢流动、无明显生面糊气味；没烤熟则中心温度偏低、有明显蛋腥味且结构塌散。用中心温度判断最直接。</div>
+      </details>
+    </section>
+
+    <!-- 8 用户评论 -->
+    <section class="panel" id="comments">
+      <div class="sec-head">
+        <h2>甜点爱好者评论</h2>
+        <span class="sec-tip">围绕具体条目</span>
+      </div>
+      <div class="comment-list">
+        <div class="comment"><div class="who"><span class="avatar" style="background:#c2410c">苏</span><b>苏打不加冰</b><time>今天 09:52</time></div><p>熔岩巧克力 4 版按 220℃ 烤了 9 分钟，中心流得刚好，比之前 200℃ 那版稳定。<span class="star">★★★★★</span></p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#b45309">阿</span><b>阿柚的烤箱</b><time>今天 08:36</time></div><p>焦糖布丁 110℃ 水浴确实没蜂窝，但脱模还是裂了一点，可能冷藏时间不够。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#9a3412">小</span><b>小满烘焙日记</b><time>昨天 22:14</time></div><p>流心挞酥皮 3:2 的配比很酥，就是折叠次数多了容易破，我减到 3 次好很多。<span class="star">★★★★☆</span></p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#d97706">南</span><b>南瓜拿铁</b><time>昨天 20:05</time></div><p>低糖那篇很实用，赤藓糖醇替换后我烤了两次都偏干，按文中减液体才正常。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#a16207">麦</span><b>麦麦不吃甜</b><time>昨天 18:47</time></div><p>巴斯克 62℃ 出炉冷藏后中心还是流动的，但我觉得有点腻，下次想减黄油试试。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#7c2d12">林</span><b>林间小灶</b><time>昨天 16:20</time></div><p>舒芙蕾出炉 3 分钟内吃是真的，晚了就塌，内芯流心也没了。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#b45309">月</span><b>月半甜点铺</b><time>11-07 21:33</time></div><p>流心提拉米苏蛋黄糊 82℃ 比 80℃ 好操作，不容易结块，感谢调整。<span class="star">★★★★★</span></p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#c2410c">橙</span><b>橙子味的风</b><time>11-07 19:12</time></div><p>探店实拍那 3 家我去过两家，切面流速记录挺准，第二家确实偏固态。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#92400e">江</span><b>江边的厨房</b><time>11-07 15:40</time></div><p>冷冻流心芯料这个方法适合我这种烤箱温度不稳的，包进去后基本不会失手。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#d97706">季</span><b>季节限定</b><time>11-06 22:08</time></div><p>熔岩巧克力黄油降到 62% 后确实没那么流了，我按文中缩短时间才好一点。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#9a3412">安</span><b>安和小满</b><time>11-06 18:55</time></div><p>想问流心挞芯料能不能提前一天做好冷藏，第二天再烤？</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#a16207">团</span><b>团子不加糖</b><time>11-06 14:26</time></div><p>焦糖脆壳喷枪距离写得很具体，我 15cm 喷出来刚好不苦。<span class="star">★★★★☆</span></p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#7c2d12">三</span><b>三分钟热度</b><time>11-05 21:47</time></div><p>看完深度解析才知道流心和夹心不是一回事，之前一直搞混。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#b45309">豆</span><b>豆浆配油条</b><time>11-05 17:09</time></div><p>巴斯克中心温度判断法好用，比看表面颜色靠谱多了。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#c2410c">晴</span><b>晴天小烤箱</b><time>11-04 20:31</time></div><p>舒芙蕾蛋白打到湿性偏干这一步最难，我打过了两次都塌。</p></div>
+        <div class="comment"><div class="who"><span class="avatar" style="background:#92400e">木</span><b>木木烘焙</b><time>11-04 13:15</time></div><p>整体配方写得细，但希望能多一些无糖版本的实测数据。</p></div>
+      </div>
+    </section>
+
+    <!-- 9 相关资讯 -->
+    <section class="panel" id="news">
+      <div class="sec-head">
+        <h2>流心甜点相关资讯</h2>
+        <span class="sec-tip">2026 年 11 月</span>
+      </div>
+      <div class="news-list">
+        <article class="news-item">
+          <div class="news-thumb"><img src="https://picsum.photos/seed/liuxin-news01/600/400" width="600" height="400" loading="lazy" alt="流心挞门店切面实拍"></div>
+          <div>
+            <span class="date">2026-11-08</span>
+            <h3><a href="/#updates">流心挞门店实拍新增 3 家，切面流速成比较焦点</a></h3>
+            <p>本期实拍记录了三家烘焙店流心挞切开后 10 秒内的中心状态，其中两家偏膏状，一家接近全液态。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <div class="news-thumb"><img src="https://picsum.photos/seed/liuxin-news02/600/400" width="600" height="400" loading="lazy" alt="熔岩巧克力蛋糕烘烤档位"></div>
+          <div>
+            <span class="date">2026-11-07</span>
+            <h3><a href="/#featured">熔岩巧克力蛋糕 220℃ 档位配方上线</a></h3>
+            <p>新版把烘烤时间压缩到 9 分钟，附中心温度判读图，适合温度偏高的家用烤箱。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <div class="news-thumb"><img src="https://picsum.photos/seed/liuxin-news03/600/400" width="600" height="400" loading="lazy" alt="低糖流心配方对照表"></div>
+          <div>
+            <span class="date">2026-11-06</span>
+            <h3><a href="/#deep">低糖流心配方对照更新，赤藓糖醇替换有实测数据</a></h3>
+            <p>替换 30% 白砂糖后需延长约 1 分 20 秒，并减少 5% 液体量，文中列出两轮对照结果。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <div class="news-thumb"><img src="https://picsum.photos/seed/liuxin-news04/600/400" width="600" height="400" loading="lazy" alt="冷冻流心芯料制作"></div>
+          <div>
+            <span class="date">2026-11-03</span>
+            <h3><a href="/#updates">冷冻流心芯料做法走热，家庭烤箱适配方案受关注</a></h3>
+            <p>芯料提前冻成小球再包入面糊，可降低对烤箱温度稳定性的依赖，直径与冷冻时长已有明确建议。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <div class="news-thumb"><img src="https://picsum.photos/seed/liuxin-news05/600/400" width="600" height="400" loading="lazy" alt="焦糖布丁水浴控温"></div>
+          <div>
+            <span class="date">2026-11-01</span>
+            <h3><a href="/#deep">焦糖布丁水浴温度修订，110℃ 与 120℃ 差异整理</a></h3>
+            <p>修订版补充了两档水浴温度下的凝固时间差，并说明蜂窝产生的具体温度区间。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <div class="news-thumb"><img src="https://picsum.photos/seed/liuxin-news06/600/400" width="600" height="400" loading="lazy" alt="流心甜点探店榜单"></div>
+          <div>
+            <span class="date">2026-10-30</span>
+            <h3><a href="/#rank">流心甜点探店榜单更新，8 家门店按切面流速排列</a></h3>
+            <p>榜单以切面流速、甜度分层和酥皮厚度三项为准，前三名均为现烤现售门店。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 10 相关推荐 -->
+    <section class="panel" id="related">
+      <div class="sec-head">
+        <h2>延伸方向与条目索引</h2>
+      </div>
+      <div class="rel-tags">
+        <a href="/#deep">熔岩巧克力中心温度</a>
+        <a href="/#deep">流心挞酥皮折叠</a>
+        <a href="/#guide">焦糖布丁水浴法</a>
+        <a href="/#deep">流心巴斯克半熟判断</a>
+        <a href="/#featured">巧克力舒芙蕾蛋白霜</a>
+        <a href="/#deep">低糖流心配方替换</a>
+        <a href="/#updates">冷冻流心芯料做法</a>
+        <a href="/#featured">流心提拉米苏隔水打发</a>
+      </div>
+    </section>
+
+    <!-- 11 热门榜单 -->
+    <section class="panel" id="rank">
+      <div class="sec-head">
+        <h2>本周流心甜点热门榜单</h2>
+        <span class="sec-tip">截至 2026-11-08</span>
+      </div>
+      <div class="rank-list">
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">熔岩巧克力蛋糕 4 版配方</span><span class="type"> · 熔岩巧克力</span></div><span class="score">9.6</span></div>
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">焦糖布丁 110℃ 水浴法</span><span class="type"> · 焦糖布丁</span></div><span class="score">9.3</span></div>
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">流心挞酥皮与奶浆配比</span><span class="type"> · 流心挞</span></div><span class="score">9.1</span></div>
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">流心巴斯克 230℃ 短烤</span><span class="type"> · 巴斯克</span></div><span class="score">8.9</span></div>
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">巧克力舒芙蕾不回缩做法</span><span class="type"> · 舒芙蕾</span></div><span class="score">8.7</span></div>
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">流心提拉米苏蛋黄糊</span><span class="type"> · 提拉米苏</span></div><span class="score">8.6</span></div>
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">冷冻流心芯料做法</span><span class="type"> · 通用技巧</span></div><span class="score">8.4</span></div>
+        <div class="rank-item"><span class="rank-no"></span><div><span class="name">低糖流心配方对照</span><span class="type"> · 配方调整</span></div><span class="score">8.2</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 右侧辅助栏 -->
+  <aside class="aside-col">
+    <div class="side-card">
+      <h2>更新流</h2>
+      <div class="mini-list">
+        <a href="/#updates"><span class="dot">●</span>熔岩巧克力 4 版 已上线 <small>今天</small></a>
+        <a href="/#updates"><span class="dot">●</span>焦糖布丁控温表 修订 <small>今天</small></a>
+        <a href="/#updates"><span class="dot">●</span>流心挞门店实拍 +3 <small>昨天</small></a>
+        <a href="/#updates"><span class="dot">●</span>巴斯克 6 寸配方 补充 <small>昨天</small></a>
+        <a href="/#updates"><span class="dot">●</span>低糖流心对照 实测 <small>11-06</small></a>
+      </div>
+    </div>
+
+    <div class="side-card">
+      <h2>烘焙时间线</h2>
+      <div class="timeline">
+        <div class="tl-item"><b>11-08</b><span>熔岩巧克力 220℃ 档位上线</span></div>
+        <div class="tl-item"><b>11-06</b><span>低糖流心配方对照更新</span></div>
+        <div class="tl-item"><b>11-03</b><span>冷冻流心芯料做法发布</span></div>
+        <div class="tl-item"><b>11-01</b><span>焦糖布丁水浴温度修订</span></div>
+        <div class="tl-item"><b>10-30</b><span>探店榜单收录 8 家门店</span></div>
+      </div>
+    </div>
+
+    <div class="side-card quote-card">
+      <blockquote>“流心不是烤得短就行，中心温度和出炉时机才是可复现的关键。”</blockquote>
+      <div class="from">—— 一位家庭烘焙者的配方笔记</div>
+    </div>
+
+    <div class="side-card">
+      <h2>编辑关注条目</h2>
+      <div class="mini-list">
+        <a href="/#deep"><span class="dot">›</span>熔岩巧克力黄油比例对照</a>
+        <a href="/#deep"><span class="dot">›</span>流心挞芯料冷藏时长</a>
+        <a href="/#guide"><span class="dot">›</span>焦糖脆壳喷枪距离</a>
+        <a href="/#deep"><span class="dot">›</span>巴斯克中心温度区间</a>
+        <a href="/#featured"><span class="dot">›</span>舒芙蕾蛋白霜状态</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">糖心入口</span>
+      <p>聚焦流心蛋糕、熔岩巧克力、焦糖布丁、流心挞等具体甜点的配方拆解、控温要点与门店实拍，为家庭烘焙与甜品爱好者提供可对照的判断依据。</p>
+    </div>
+    <div class="footer-col">
+      <h3>甜点分类</h3>
+      <a href="/#featured">熔岩巧克力</a>
+      <a href="/#featured">流心挞</a>
+      <a href="/#featured">焦糖布丁</a>
+      <a href="/#featured">流心巴斯克</a>
+      <a href="/#featured">舒芙蕾</a>
+    </div>
+    <div class="footer-col">
+      <h3>阅读入口</h3>
+      <a href="/#overview">领域概览</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#rank">热门榜单</a>
+    </div>
+    <div class="footer-col">
+      <h3>更新与发现</h3>
+      <a href="/#updates">最新更新</a>
+      <a href="/#news">相关资讯</a>
+      <a href="/#related">延伸方向</a>
+      <a href="/#comments">爱好者评论</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 糖心入口 · 甜点烘焙内容聚合</span>
+    <span>部分内容为示例数据，仅用于展示页面结构</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var input = document.getElementById('siteSearch');
+  var hint = document.getElementById('searchHint');
+  if(!input || !hint) return;
+
+  var sections = Array.prototype.slice.call(
+    document.querySelectorAll('main .panel, .aside-col .side-card, .channel-box')
+  );
+
+  function textOf(el){ return (el.textContent || '').replace(/\s+/g,''); }
+
+  function reset(){
+    sections.forEach(function(s){ s.style.display=''; });
+  }
+
+  function search(){
+    var q = input.value.trim().toLowerCase();
+    if(!q){ reset(); hint.classList.remove('show'); hint.textContent=''; return; }
+    var hit = 0;
+    sections.forEach(function(s){
+      var match = textOf(s).toLowerCase().indexOf(q) > -1;
+      if(match){ s.style.display=''; hit++; } else { s.style.display='none'; }
+    });
+    hint.classList.add('show');
+    hint.textContent = hit > 0
+      ? '找到 ' + hit + ' 个相关板块，已隐藏其余内容'
+      : '没有找到包含“' + input.value.trim() + '”的内容，试试“熔岩”“布丁”“流心挞”';
+  }
+
+  var timer = null;
+  input.addEventListener('input', function(){
+    clearTimeout(timer);
+    timer = setTimeout(search, 180);
+  });
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ input.value=''; reset(); hint.classList.remove('show'); hint.textContent=''; }
+  });
+})();
+</script>
+
+</body>
+  </html>
